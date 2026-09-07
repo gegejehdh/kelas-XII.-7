@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Portal Resmi Kelas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Portal Resmi</span>
+                    <h1 class="text-lg font-extrabold text-slate-900 tracking-tight" id="navClassName">KELAS XII IPA 1</h1>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 font-semibold text-sm text-slate-600">
+                <a href="#beranda" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Beranda</a>
+                <a href="#struktur" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Struktur</a>
+                <a href="#siswa" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Daftar Siswa</a>
+                <a href="#piket" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Jadwal Piket</a>
+                <a href="#pesan" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Dinding Pesan</a>
+            </nav>
+
+            <button class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 border-t border-slate-100 bg-white space-y-1">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Beranda</a>
+            <a href="#struktur" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Struktur</a>
+            <a href="#siswa" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Daftar Siswa</a>
+            <a href="#piket" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Jadwal Piket</a>
+            <a href="#pesan" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Dinding Pesan</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="beranda" class="relative pt-16 pb-24 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50">
+            <div class="absolute inset-0 -z-10 opacity-30">
+                <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-300 rounded-full blur-3xl"></div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm mb-6 shadow-sm">
+                    <i class="fa-solid fa-sparkles"></i> <span id="heroBadge">Angkatan Aktif • Solid & Berprestasi</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+                    Selamat Datang di Portal <br><span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent" id="heroClassName">XII IPA 1</span>
+                </h1>
+                <p class="max-w-2xl mx-auto text-lg text-slate-600 mb-10 leading-relaxed" id="heroTagline">
+                    Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#siswa" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-xl shadow-blue-200 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+                        <i class="fa-solid fa-users"></i> Lihat Daftar Siswa
+                    </a>
+                    <a href="#pesan" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-2xl border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5 flex items-center gap-3">
+                        <i class="fa-solid fa-paper-plane text-blue-600"></i> Kirim Pesan
+                    </a>
+                </div>
+
+                <!-- Wali Kelas Spotlight Card -->
+                <div class="mt-20 max-w-xl mx-auto bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 flex flex-col sm:flex-row items-center gap-6 text-left">
+                    <img id="waliFoto" src="https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas" alt="Wali Kelas" class="w-28 h-28 rounded-2xl object-cover shadow-md flex-shrink-0" onerror="this.src='https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas'">
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-bold rounded-lg mb-2">Wali Kelas Kami</span>
+                        <h3 class="text-xl font-bold text-slate-900" id="waliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
+                        <p class="text-sm text-slate-500 mt-1 mb-3">Guru Mata Pelajaran Teladan & Pembina Kelas.</p>
+                        <div class="flex items-center gap-2 text-xs font-semibold text-blue-600">
+                            <i class="fa-solid fa-quote-left text-slate-300"></i>
+                            <span id="waliQuote">"Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten."</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Struktur Organisasi Section -->
+        <section id="struktur" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Hierarki & Kepengurusan</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Bagan Struktur Organisasi Kelas</h2>
+                    <p class="text-slate-600 mt-2">Bagan hirarki kepengurusan inti kelas secara formal dari Pembina hingga Pengurus.</p>
+                </div>
+
+                <!-- Bagan Struktur Formal (Org Chart Tree) -->
+                <div class="flex flex-col items-center overflow-x-auto py-4">
+                    <div class="min-w-[700px] flex flex-col items-center">
+                        
+                        <!-- Level 1: Wali Kelas -->
+                        <div class="flex flex-col items-center">
+                            <div class="w-72 bg-gradient-to-tr from-blue-700 to-cyan-600 text-white rounded-2xl p-5 text-center shadow-xl border border-blue-400 relative">
+                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-white text-blue-700 text-xs font-extrabold rounded-full shadow">WALI KELAS</span>
+                                <img id="baganWaliFoto" src="https://placehold.co/90x90/ffffff/2563eb?text=Wali" alt="Wali Kelas" class="w-16 h-16 rounded-xl mx-auto object-cover shadow mb-3 border-2 border-white" onerror="this.src='https://placehold.co/90x90/ffffff/2563eb?text=Wali'">
+                                <h3 class="text-base font-bold" id="baganWaliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
+                                <p class="text-[11px] text-blue-100 mt-0.5">Pembina & Pengarah Kelas</p>
+                            </div>
+                            <!-- Vertical Line Down -->
+                            <div class="w-0.5 h-8 bg-blue-300"></div>
+                        </div>
+
+                        <!-- Connector Horizontal for Level 2 (Ketua & Wakil) -->
+                        <div class="relative w-[500px] h-0.5 bg-blue-300">
+                            <!-- Dropdown vertical line to Ketua -->
+                            <div class="absolute left-0 top-0 w-0.5 h-6 bg-blue-300"></div>
+                            <!-- Dropdown vertical line to Wakil -->
+                            <div class="absolute right-0 top-0 w-0.5 h-6 bg-blue-300"></div>
+                        </div>
+
+                        <!-- Level 2: Ketua & Wakil Ketua Kelas -->
+                        <div class="w-full max-w-[600px] flex justify-between pt-6 gap-8">
+                            <!-- Ketua Kelas -->
+                            <div class="w-64 bg-white rounded-2xl p-4 text-center shadow-md border-2 border-blue-600 relative">
+                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-xs font-extrabold rounded-full shadow">KETUA KELAS</span>
+                                <img id="baganKetuaFoto" src="https://placehold.co/80x80/2563eb/ffffff?text=Ketua" class="w-14 h-14 rounded-xl mx-auto object-cover shadow mb-2 border border-blue-100" onerror="this.src='https://placehold.co/80x80/2563eb/ffffff?text=Ketua'">
+                                <h4 class="font-bold text-slate-900 text-sm" id="baganKetuaNama">Muhammad Farhan</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5" id="baganKetuaDesc">Pemimpin Umum Kelas</p>
+                            </div>
+
+                            <!-- Wakil Ketua -->
+                            <div class="w-64 bg-white rounded-2xl p-4 text-center shadow-md border-2 border-blue-500 relative">
+                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-500 text-white text-xs font-extrabold rounded-full shadow">WAKIL KETUA</span>
+                                <img id="baganWakilFoto" src="https://placehold.co/80x80/3b82f6/ffffff?text=Wakil" class="w-14 h-14 rounded-xl mx-auto object-cover shadow mb-2 border border-blue-100" onerror="this.src='https://placehold.co/80x80/3b82f6/ffffff?text=Wakil'">
+                                <h4 class="font-bold text-slate-900 text-sm" id="baganWakilNama">Siti Rahmawati</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5" id="baganWakilDesc">Koordinator Internal & Acara</p>
+                            </div>
+                        </div>
+
+                        <!-- Vertical Line Down from Level 2 -->
+                        <div class="flex justify-between w-[500px]">
+                            <div class="w-0.5 h-6 bg-blue-300 ml-32"></div>
+                            <div class="w-0.5 h-6 bg-blue-300 mr-32"></div>
+                        </div>
+
+                        <!-- Connector Horizontal for Level 3 (Sekretaris & Bendahara) -->
+                        <div class="relative w-[680px] h-0.5 bg-blue-300">
+                            <!-- Dropdown vertical lines to 4 boxes -->
+                            <div class="absolute left-1 top-0 w-0.5 h-6 bg-blue-300"></div>
+                            <div class="absolute left-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
+                            <div class="absolute right-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
+                            <div class="absolute right-1 top-0 w-0.5 h-6 bg-blue-300"></div>
+                        </div>
+
+                        <!-- Level 3: Sekretaris 1, Sekretaris 2, Bendahara 1, Bendahara 2 -->
+                        <div class="w-full max-w-[760px] flex justify-between pt-6 gap-3">
+                            <!-- Sekretaris 1 -->
+                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 1</span>
+                                <img id="baganSek1Foto" src="https://placehold.co/60x60/2563eb/ffffff?text=Sek1" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/2563eb/ffffff?text=Sek1'">
+                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek1Nama">Dewi Lestari</h5>
+                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganSek1Desc">Administrasi</p>
+                            </div>
+                            <!-- Sekretaris 2 -->
+                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 2</span>
+                                <img id="baganSek2Foto" src="https://placehold.co/60x60/3b82f6/ffffff?text=Sek2" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/3b82f6/ffffff?text=Sek2'">
+                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek2Nama">-</h5>
+                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganSek2Desc">Surat-menyurat</p>
+                            </div>
+                            <!-- Bendahara 1 -->
+                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-cyan-600 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 1</span>
+                                <img id="baganBen1Foto" src="https://placehold.co/60x60/0891b2/ffffff?text=Ben1" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/0891b2/ffffff?text=Ben1'">
+                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen1Nama">Rizky Pratama</h5>
+                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganBen1Desc">Keuangan Utama</p>
+                            </div>
+                            <!-- Bendahara 2 -->
+                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 2</span>
+                                <img id="baganBen2Foto" src="https://placehold.co/60x60/06b6d4/ffffff?text=Ben2" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/06b6d4/ffffff?text=Ben2'">
+                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen2Nama">-</h5>
+                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganBen2Desc">Pencatatan Kas</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daftar Siswa Section -->
+        <section id="siswa" class="py-20 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Anggota Kelas</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Daftar Siswa & Siswi</h2>
+                        <p class="text-slate-600 mt-1">Daftar lengkap seluruh anggota keluarga besar kelas.</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-search"></i>
+                        </span>
+                        <input type="text" id="searchSiswa" oninput="filterSiswa()" placeholder="Cari nama atau absen..." class="w-full pl-10 pr-4 py-3 bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm shadow-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="siswaContainer"></div>
+            </div>
+        </section>
+
+        <!-- Jadwal Piket Section -->
+        <section id="piket" class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Kedisiplinan & Kebersihan</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Jadwal Piket Kebersihan</h2>
+                    <p class="text-slate-600 mt-2">Pilih hari untuk melihat petugas piket yang bertugas menjaga kebersihan.</p>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-2 mb-10" id="dayTabs"></div>
+
+                <div class="max-w-xl mx-auto bg-gradient-to-br from-blue-900 to-slate-900 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1" id="selectedDayTitle">Senin</h3>
+                    <p class="text-blue-200 text-sm mb-6">Pastikan kelas bersih sebelum jam pelajaran pertama dimulai.</p>
+                    <ul class="space-y-3" id="piketMemberList"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dinding Pesan Section -->
+        <section id="pesan" class="py-20 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Kirim Aspirasi & Salam</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Kirim Pesan Rahasia</h2>
+                    <p class="text-slate-600 mt-2 text-sm">Kirimkan kesan, pesan semangat, atau salam. Pesan Anda bersifat privat dan hanya akan diterima oleh pengurus kelas.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                    <form id="messageForm" onsubmit="handlePostMessage(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Nama Pengirim</label>
+                            <input type="text" id="msgName" required value="Geril Suardi" placeholder="Contoh: Geril Suardi" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Penerima / Target</label>
+                            <input type="text" id="msgTarget" required placeholder="Contoh: Wali Kelas / Seluruh Pengurus" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Isi Pesan</label>
+                            <textarea id="msgContent" required rows="4" placeholder="Tulis pesan rahasia di sini..." class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div>
+                <div class="flex items-center justify-center sm:justify-start gap-3 mb-2">
+                    <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <span class="font-bold text-lg" id="footerClassName">XII IPA 1 Portal</span>
+                </div>
+                <p class="text-sm text-slate-400">Website kelas publik resmi angkatan.</p>
+            </div>
+            <p class="text-xs text-slate-500">© 2026 Portal Kelas Kita. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold border border-slate-700">
+        <i class="fa-solid fa-circle-check text-blue-400"></i>
+        <span id="toastMsg">Berhasil!</span>
+    </div>
+
+    <script>
+        const defaultData = {
+            className: "XII IPA 1",
+            heroBadge: "Angkatan Aktif • Solid & Berprestasi",
+            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            wali: {
+                nama: "Drs. H. Ahmad Fauzi, M.Pd.",
+                quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten.",
+                foto: "https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas"
+            },
+            struktur: {
+                ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "https://placehold.co/90x90/2563eb/ffffff?text=Ketua" },
+                wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "https://placehold.co/90x90/0891b2/ffffff?text=Wakil" },
+                sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "https://placehold.co/80x80/2563eb/ffffff?text=Sek1" },
+                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "https://placehold.co/80x80/3b82f6/ffffff?text=Sek2" },
+                ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "https://placehold.co/80x80/0891b2/ffffff?text=Ben1" },
+                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "https://placehold.co/80x80/06b6d4/ffffff?text=Ben2" }
+            },
+            siswa: [
+                { absen: 1, nama: "Ahmad Zaki", gender: "L", hobi: "Sepak Bola", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Zaki" },
+                { absen: 2, nama: "Alya Nabila", gender: "P", hobi: "Membaca Novel", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Alya" },
+                { absen: 3, nama: "Andika Pratama", gender: "L", hobi: "Gaming & Coding", foto: "https://placehold.co/100x100/0891b2/ffffff?text=Andika" },
+                { absen: 4, nama: "Anisa Fitri", gender: "P", hobi: "Menyanyi", foto: "https://placehold.co/100x100/06b6d4/ffffff?text=Anisa" },
+                { absen: 5, nama: "Dimas Anggara", gender: "L", hobi: "Basket", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Dimas" },
+                { absen: 6, nama: "Fauziah Zahra", gender: "P", hobi: "Seni Lukis", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Zahra" }
+            ],
+            piket: {
+                "Senin": ["Ahmad Zaki", "Alya Nabila", "Andika Pratama"],
+                "Selasa": ["Anisa Fitri", "Dimas Anggara", "Fauziah Zahra"],
+                "Rabu": ["Ilham Ramadhan", "Karin Novilda", "M. Al Fath"],
+                "Kamis": ["Nadia Safitri", "Reza Pahlevi", "Salsabila Putri"],
+                "Jumat": ["Seluruh Anggota Kelas (Piket Bersama)"]
+            },
+            messages: []
+        };
+
+        let appData = JSON.parse(localStorage.getItem('classPortalData')) || defaultData;
+        let currentDay = "Senin";
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+            window.addEventListener('focus', () => {
+                renderAll();
+            });
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'classPortalData') {
+                    renderAll();
+                }
+            });
+        });
+
+        function renderAll() {
+            const raw = localStorage.getItem('classPortalData');
+            if (!raw) {
+                localStorage.setItem('classPortalData', JSON.stringify(defaultData));
+                appData = defaultData;
+            } else {
+                appData = JSON.parse(raw);
+            }
+
+            document.getElementById('pageTitle').innerText = `Portal Resmi ${appData.className}`;
+            document.getElementById('navClassName').innerText = appData.className;
+            document.getElementById('heroBadge').innerText = appData.heroBadge;
+            document.getElementById('heroClassName').innerText = appData.className;
+            document.getElementById('heroTagline').innerText = appData.tagline;
+            document.getElementById('footerClassName').innerText = `${appData.className} Portal`;
+
+            document.getElementById('waliNama').innerText = appData.wali.nama;
+            document.getElementById('waliQuote').innerText = `"${appData.wali.quote}"`;
+            document.getElementById('waliFoto').src = appData.wali.foto;
+
+            // Render Bagan Struktur
+            document.getElementById('baganWaliNama').innerText = appData.wali.nama;
+            document.getElementById('baganWaliFoto').src = appData.wali.foto;
+
+            if (appData.struktur) {
+                const st = appData.struktur;
+                if (st.ketua) {
+                    document.getElementById('baganKetuaNama').innerText = st.ketua.nama;
+                    document.getElementById('baganKetuaDesc').innerText = st.ketua.desc;
+                    document.getElementById('baganKetuaFoto').src = st.ketua.foto;
+                }
+                if (st.wakil) {
+                    document.getElementById('baganWakilNama').innerText = st.wakil.nama;
+                    document.getElementById('baganWakilDesc').innerText = st.wakil.desc;
+                    document.getElementById('baganWakilFoto').src = st.wakil.foto;
+                }
+                if (st.sek1) {
+                    document.getElementById('baganSek1Nama').innerText = st.sek1.nama;
+                    document.getElementById('baganSek1Desc').innerText = st.sek1.desc;
+                    document.getElementById('baganSek1Foto').src = st.sek1.foto;
+                }
+                if (st.sek2) {
+                    document.getElementById('baganSek2Nama').innerText = st.sek2.nama;
+                    document.getElementById('baganSek2Desc').innerText = st.sek2.desc;
+                    document.getElementById('baganSek2Foto').src = st.sek2.foto;
+                }
+                if (st.ben1) {
+                    document.getElementById('baganBen1Nama').innerText = st.ben1.nama;
+                    document.getElementById('baganBen1Desc').innerText = st.ben1.desc;
+                    document.getElementById('baganBen1Foto').src = st.ben1.foto;
+                }
+                if (st.ben2) {
+                    document.getElementById('baganBen2Nama').innerText = st.ben2.nama;
+                    document.getElementById('baganBen2Desc').innerText = st.ben2.desc;
+                    document.getElementById('baganBen2Foto').src = st.ben2.foto;
+                }
+            }
+
+            renderSiswa(appData.siswa);
+            renderPiketTabs();
+            selectPiketDay(currentDay);
+        }
+
+        function renderSiswa(list) {
+            const container = document.getElementById('siswaContainer');
+            if (!list || list.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 font-medium">Siswa tidak ditemukan.</div>`;
+                return;
+            }
+            container.innerHTML = list.map(s => `
+                <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center text-center gap-3 hover:shadow-md transition">
+                    <img src="${s.foto || 'https://placehold.co/100x100/2563eb/ffffff?text=Siswa'}" alt="${s.nama}" class="w-20 h-20 rounded-2xl object-cover shadow-sm border border-slate-100" onerror="this.src='https://placehold.co/100x100/2563eb/ffffff?text=Siswa'">
+                    <div class="w-full overflow-hidden">
+                        <div class="inline-block px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-600 text-xs font-extrabold mb-1">Absen ${s.absen}</div>
+                        <h4 class="font-bold text-slate-900 truncate text-base">${s.nama}</h4>
+                        <div class="flex items-center justify-center gap-2 mt-1">
+                            <span class="text-xs px-2 py-0.5 rounded font-semibold ${s.gender === 'L' ? 'bg-blue-50 text-blue-600' : 'bg-pink-50 text-pink-600'}">${s.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
+                        </div>
+                        <p class="text-xs text-slate-400 truncate mt-1">Hobi: ${s.hobi || '-'}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterSiswa() {
+            const query = document.getElementById('searchSiswa').value.toLowerCase();
+            const filtered = (appData.siswa || []).filter(s => 
+                s.nama.toLowerCase().includes(query) || s.absen.toString().includes(query) || (s.hobi && s.hobi.toLowerCase().includes(query))
+            );
+            renderSiswa(filtered);
+        }
+
+        function renderPiketTabs() {
+            const days = Object.keys(appData.piket || {});
+            const container = document.getElementById('dayTabs');
+            container.innerHTML = days.map(day => `
+                <button onclick="selectPiketDay('${day}')" class="px-5 py-2.5 rounded-xl font-bold text-sm transition ${currentDay === day ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+                    ${day}
+                </button>
+            `).join('');
+        }
+
+        function selectPiketDay(day) {
+            currentDay = day;
+            renderPiketTabs();
+            document.getElementById('selectedDayTitle').innerText = `Petugas Hari ${day}`;
+            const members = appData.piket[day] || [];
+            const listContainer = document.getElementById('piketMemberList');
+            listContainer.innerHTML = members.map((m, idx) => `
+                <li class="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl text-sm font-medium">
+                    <span class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs font-bold">${idx + 1}</span>
+                    <span>${m}</span>
+                </li>
+            `).join('');
+        }
+
+        function handlePostMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById('msgName').value.trim();
+            const target = document.getElementById('msgTarget').value.trim();
+            const content = document.getElementById('msgContent').value.trim();
+
+            if (!name || !target || !content) return;
+
+            const newMsg = {
+                id: Date.now(),
+                name,
+                target,
+                content,
+                time: "Baru saja"
+            };
+
+            const currentRaw = localStorage.getItem('classPortalData');
+            if (currentRaw) {
+                appData = JSON.parse(currentRaw);
+            }
+            if (!appData.messages) {
+                appData.messages = [];
+            }
+            appData.messages.unshift(newMsg);
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            
+            document.getElementById('msgTarget').value = "";
+            document.getElementById('msgContent').value = "";
+            showToast("Pesan berhasil dikirim!");
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
