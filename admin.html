@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Kontrol Khusus Admin Kelas</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen">
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-xl px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+            <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl mb-6 mx-auto">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h2 class="text-2xl font-extrabold text-center text-white mb-2">Akses Terbatas Admin</h2>
+            <p class="text-xs text-slate-400 text-center mb-6">Website khusus pengurus. Masukkan kunci rahasia akses.</p>
+            
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kunci Keamanan Rahasia</label>
+                    <input type="password" id="secretKeyInput" required placeholder="Masukkan kunci rahasia..." class="w-full px-4 py-3.5 bg-slate-950 rounded-2xl border border-slate-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-xl shadow-blue-900/40 transition">
+                    Buka Panel Kontrol Admin
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <a href="index.html" class="text-xs text-blue-400 hover:underline font-semibold flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Website Publik Kelas
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD KONTROL UTAMA -->
+    <div id="adminDashboard" class="hidden min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto space-y-8">
+            <!-- Header Panel -->
+            <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-8 shadow-2xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold mb-3 border border-blue-500/30">
+                        <i class="fa-solid fa-circle-dot animate-pulse"></i> Sesi Pemegang Tunggal Aktif
+                    </div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white">Panel Kontrol Khusus Pengurus</h1>
+                    <p class="text-blue-200 text-sm mt-1">Unggah foto pengurus, kelola daftar siswa, jadwal piket, & seluruh informasi kelas.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="index.html" target="_blank" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i> Kunjungi Web Publik
+                    </a>
+                    <button onclick="adminLogout()" class="px-4 py-3 bg-rose-600/20 hover:bg-rose-600/40 text-rose-300 font-bold text-sm rounded-2xl border border-rose-500/30 transition">
+                        Keluar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Menu -->
+            <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
+                <button onclick="switchTab('inbox')" id="tabBtnInbox" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-inbox"></i> Kotak Masuk Pesan (<span id="inboxBadge">0</span>)
+                </button>
+                <button onclick="switchTab('settings')" id="tabBtnSettings" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> Pengaturan Konten & Foto
+                </button>
+                <button onclick="switchTab('students')" id="tabBtnStudents" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-users-gear"></i> Kelola Anggota Siswa (<span id="studentsBadge">0</span>)
+                </button>
+                <button onclick="switchTab('piket')" id="tabBtnPiket" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-broom"></i> Kelola Jadwal Piket
+                </button>
+            </div>
+
+            <!-- TAB 1: INBOX PESAN -->
+            <div id="tabInbox" class="space-y-6">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Kotak Masuk Pesan Publik</h3>
+                            <p class="text-xs text-slate-400 mt-1">Pesan rahasia yang dikirim pengunjung melalui dinding pesan web publik.</p>
+                        </div>
+                        <button onclick="clearAllMessages()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-bold rounded-xl transition border border-rose-500/30">
+                            Hapus Semua Pesan
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4 max-h-[600px] overflow-y-auto pr-2" id="adminMessagesContainer"></div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PENGATURAN KONTEN & FOTO -->
+            <div id="tabSettings" class="hidden space-y-6">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square text-blue-400"></i> Ubah Identitas, Informasi & Unggah Foto
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Kelas</label>
+                            <input type="text" id="inputClassName" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Badge Atas Hero</label>
+                            <input type="text" id="inputHeroBadge" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tagline Utama</label>
+                        <textarea id="inputTagline" rows="2" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- Wali Kelas -->
+                    <div class="pt-4 border-t border-slate-800">
+                        <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider mb-4">Pengaturan & Unggah Foto Wali Kelas</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Wali Kelas</label>
+                                <input type="text" id="inputWaliNama" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kutipan Wali Kelas</label>
+                                <input type="text" id="inputWaliQuote" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah File Foto Wali Kelas</label>
+                                <input type="file" id="inputWaliFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputWaliFoto')" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer mb-2">
+                                <input type="hidden" id="inputWaliFoto">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pengaturan Struktur Bagan Inti (Tree Hierarchy) dengan Unggah Foto -->
+                    <div class="pt-4 border-t border-slate-800 space-y-6">
+                        <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Pengaturan Struktur Bagan & Unggah Foto Pengurus</h4>
+
+                        <!-- Ketua & Wakil -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Ketua Kelas</label>
+                                <input type="text" id="inputKetuaNama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Ketua Kelas</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputKetuaFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputKetuaFoto">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Wakil Ketua</label>
+                                <input type="text" id="inputWakilNama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Wakil Ketua</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputWakilFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputWakilFoto">
+                            </div>
+                        </div>
+
+                        <!-- Sekretaris 1 & 2 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Sekretaris 1</label>
+                                <input type="text" id="inputSek1Nama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Sekretaris 1</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputSek1Foto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputSek1Foto">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Sekretaris 2</label>
+                                <input type="text" id="inputSek2Nama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Sekretaris 2</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputSek2Foto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputSek2Foto">
+                            </div>
+                        </div>
+
+                        <!-- Bendahara 1 & 2 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Bendahara 1</label>
+                                <input type="text" id="inputBen1Nama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Bendahara 1</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputBen1Foto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputBen1Foto">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Bendahara 2</label>
+                                <input type="text" id="inputBen2Nama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Bendahara 2</label>
+                                <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputBen2Foto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputBen2Foto">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="saveAdminSettings()" class="flex-1 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-950 transition">
+                            Simpan & Perbarui Web Publik Secara Instan
+                        </button>
+                        <button onclick="resetDefaultData()" class="px-6 py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-2xl text-sm transition">
+                            Reset Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: KELOLA SISWA -->
+            <div id="tabStudents" class="hidden space-y-6">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Kelola Anggota Siswa & Foto</h3>
+                            <p class="text-xs text-slate-400 mt-1">Tambah, edit, atau hapus anggota kelas yang tampil di website publik.</p>
+                        </div>
+                        <button onclick="openAddStudentModal()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg transition flex items-center gap-2">
+                            <i class="fa-solid fa-user-plus"></i> Tambah Siswa Baru
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-slate-800 text-xs font-bold uppercase tracking-wider text-slate-400">
+                                    <th class="py-3 px-4">Absen</th>
+                                    <th class="py-3 px-4">Foto</th>
+                                    <th class="py-3 px-4">Nama Lengkap</th>
+                                    <th class="py-3 px-4">Gender</th>
+                                    <th class="py-3 px-4">Hobi</th>
+                                    <th class="py-3 px-4 text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminStudentsTableBody" class="divide-y divide-slate-800 text-sm"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: KELOLA JADWAL PIKET -->
+            <div id="tabPiket" class="hidden space-y-6">
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Kelola Jadwal Piket Kebersihan</h3>
+                            <p class="text-xs text-slate-400 mt-1">Atur petugas piket harian agar tampil akurat di halaman publik.</p>
+                        </div>
+                        <button onclick="openAddPiketModal()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg transition flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Tambah Hari / Edit Piket
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPiketContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT SISWA -->
+    <div id="studentModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <h3 class="text-xl font-bold text-white" id="modalStudentTitle">Tambah Siswa Baru</h3>
+            <form id="studentForm" onsubmit="handleSaveStudent(event)" class="space-y-4">
+                <input type="hidden" id="editStudentOriginalAbsen">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nomor Absen</label>
+                        <input type="number" id="inputSiswaAbsen" required min="1" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Gender</label>
+                        <select id="inputSiswaGender" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Lengkap</label>
+                    <input type="text" id="inputSiswaNama" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Hobi / Minat</label>
+                    <input type="text" id="inputSiswaHobi" placeholder="Contoh: Sepak Bola" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Siswa</label>
+                    <input type="file" id="inputSiswaFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputSiswaFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer mb-2">
+                    <input type="hidden" id="inputSiswaFoto">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" class="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition">Simpan</button>
+                    <button type="button" onclick="closeStudentModal()" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl transition">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT PIKET -->
+    <div id="piketModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <h3 class="text-xl font-bold text-white" id="modalPiketTitle">Kelola Petugas Piket</h3>
+            <form id="piketForm" onsubmit="handleSavePiket(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Hari</label>
+                    <input type="text" id="inputPiketHari" required placeholder="Contoh: Senin" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Daftar Nama Petugas (Pisahkan dengan koma)</label>
+                    <textarea id="inputPiketAnggota" required rows="4" placeholder="Contoh: Ahmad Zaki, Alya Nabila, Andika Pratama" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white"></textarea>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" class="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition">Simpan Jadwal</button>
+                    <button type="button" onclick="closePiketModal()" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl transition">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold border border-slate-700">
+        <i class="fa-solid fa-circle-check text-blue-400"></i>
+        <span id="toastMsg">Berhasil!</span>
+    </div>
+
+    <script>
+        const defaultData = {
+            className: "XII IPA 1",
+            heroBadge: "Angkatan Aktif • Solid & Berprestasi",
+            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            wali: {
+                nama: "Drs. H. Ahmad Fauzi, M.Pd.",
+                quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten.",
+                foto: "https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas"
+            },
+            struktur: {
+                ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "https://placehold.co/90x90/2563eb/ffffff?text=Ketua" },
+                wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "https://placehold.co/90x90/0891b2/ffffff?text=Wakil" },
+                sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "https://placehold.co/80x80/2563eb/ffffff?text=Sek1" },
+                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "https://placehold.co/80x80/3b82f6/ffffff?text=Sek2" },
+                ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "https://placehold.co/80x80/0891b2/ffffff?text=Ben1" },
+                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "https://placehold.co/80x80/06b6d4/ffffff?text=Ben2" }
+            },
+            siswa: [
+                { absen: 1, nama: "Ahmad Zaki", gender: "L", hobi: "Sepak Bola", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Zaki" },
+                { absen: 2, nama: "Alya Nabila", gender: "P", hobi: "Membaca Novel", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Alya" },
+                { absen: 3, nama: "Andika Pratama", gender: "L", hobi: "Gaming & Coding", foto: "https://placehold.co/100x100/0891b2/ffffff?text=Andika" },
+                { absen: 4, nama: "Anisa Fitri", gender: "P", hobi: "Menyanyi", foto: "https://placehold.co/100x100/06b6d4/ffffff?text=Anisa" },
+                { absen: 5, nama: "Dimas Anggara", gender: "L", hobi: "Basket", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Dimas" },
+                { absen: 6, nama: "Fauziah Zahra", gender: "P", hobi: "Seni Lukis", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Zahra" }
+            ],
+            piket: {
+                "Senin": ["Ahmad Zaki", "Alya Nabila", "Andika Pratama"],
+                "Selasa": ["Anisa Fitri", "Dimas Anggara", "Fauziah Zahra"],
+                "Rabu": ["Ilham Ramadhan", "Karin Novilda", "M. Al Fath"],
+                "Kamis": ["Nadia Safitri", "Reza Pahlevi", "Salsabila Putri"],
+                "Jumat": ["Seluruh Anggota Kelas (Piket Bersama)"]
+            },
+            messages: [
+                { id: 1, name: "Geril Suardi", target: "Wali Kelas", content: "Semangat terus untuk seluruh warga kelas XII IPA 1!", time: "Baru saja" }
+            ]
+        };
+
+        let appData = JSON.parse(localStorage.getItem('classPortalData')) || defaultData;
+        const SECRET_ADMIN_PASSWORD = "adminrahasia123";
+        let isEditingStudent = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('exclusiveAdminSession') === 'true') {
+                showDashboard();
+            }
+            window.addEventListener('focus', () => {
+                if (localStorage.getItem('exclusiveAdminSession') === 'true') {
+                    renderAdminMessages();
+                    renderAdminStudents();
+                    renderAdminPiket();
+                }
+            });
+        });
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const val = document.getElementById('secretKeyInput').value;
+            if (val === SECRET_ADMIN_PASSWORD) {
+                localStorage.setItem('exclusiveAdminSession', 'true');
+                showDashboard();
+                showToast("Berhasil masuk ke Panel Admin Khusus!");
+            } else {
+                showToast("Kunci rahasia salah! Akses ditolak.");
+                document.getElementById('secretKeyInput').value = "";
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            loadFormValues();
+            renderAdminMessages();
+            renderAdminStudents();
+            renderAdminPiket();
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('exclusiveAdminSession');
+            document.getElementById('adminDashboard').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('secretKeyInput').value = "";
+            showToast("Keluar dari sesi admin.");
+        }
+
+        function switchTab(tab) {
+            const inboxEl = document.getElementById('tabInbox');
+            const settingsEl = document.getElementById('tabSettings');
+            const studentsEl = document.getElementById('tabStudents');
+            const piketEl = document.getElementById('tabPiket');
+
+            const btnInbox = document.getElementById('tabBtnInbox');
+            const btnSettings = document.getElementById('tabBtnSettings');
+            const btnStudents = document.getElementById('tabBtnStudents');
+            const btnPiket = document.getElementById('tabBtnPiket');
+
+            inboxEl.classList.add('hidden');
+            settingsEl.classList.add('hidden');
+            studentsEl.classList.add('hidden');
+            piketEl.classList.add('hidden');
+
+            btnInbox.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+            btnSettings.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+            btnStudents.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+            btnPiket.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+
+            if (tab === 'inbox') {
+                inboxEl.classList.remove('hidden');
+                btnInbox.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
+                renderAdminMessages();
+            } else if (tab === 'settings') {
+                settingsEl.classList.remove('hidden');
+                btnSettings.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
+                loadFormValues();
+            } else if (tab === 'students') {
+                studentsEl.classList.remove('hidden');
+                btnStudents.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
+                renderAdminStudents();
+            } else if (tab === 'piket') {
+                piketEl.classList.remove('hidden');
+                btnPiket.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
+                renderAdminPiket();
+            }
+        }
+
+        function previewAndConvertImage(event, targetHiddenId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(targetHiddenId).value = e.target.result;
+                showToast("Foto berhasil dimuat ke memori sementara!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function loadFormValues() {
+            const raw = localStorage.getItem('classPortalData');
+            appData = raw ? JSON.parse(raw) : defaultData;
+            document.getElementById('inputClassName').value = appData.className;
+            document.getElementById('inputHeroBadge').value = appData.heroBadge;
+            document.getElementById('inputTagline').value = appData.tagline;
+            document.getElementById('inputWaliNama').value = appData.wali.nama;
+            document.getElementById('inputWaliQuote').value = appData.wali.quote;
+            document.getElementById('inputWaliFoto').value = appData.wali.foto;
+
+            if (appData.struktur) {
+                const st = appData.struktur;
+                if (st.ketua) {
+                    document.getElementById('inputKetuaNama').value = st.ketua.nama;
+                    document.getElementById('inputKetuaFoto').value = st.ketua.foto;
+                }
+                if (st.wakil) {
+                    document.getElementById('inputWakilNama').value = st.wakil.nama;
+                    document.getElementById('inputWakilFoto').value = st.wakil.foto;
+                }
+                if (st.sek1) {
+                    document.getElementById('inputSek1Nama').value = st.sek1.nama;
+                    document.getElementById('inputSek1Foto').value = st.sek1.foto;
+                }
+                if (st.sek2) {
+                    document.getElementById('inputSek2Nama').value = st.sek2.nama;
+                    document.getElementById('inputSek2Foto').value = st.sek2.foto;
+                }
+                if (st.ben1) {
+                    document.getElementById('inputBen1Nama').value = st.ben1.nama;
+                    document.getElementById('inputBen1Foto').value = st.ben1.foto;
+                }
+                if (st.ben2) {
+                    document.getElementById('inputBen2Nama').value = st.ben2.nama;
+                    document.getElementById('inputBen2Foto').value = st.ben2.foto;
+                }
+            }
+        }
+
+        function saveAdminSettings() {
+            const raw = localStorage.getItem('classPortalData');
+            appData = raw ? JSON.parse(raw) : defaultData;
+
+            appData.className = document.getElementById('inputClassName').value || "XII IPA 1";
+            appData.heroBadge = document.getElementById('inputHeroBadge').value || "";
+            appData.tagline = document.getElementById('inputTagline').value || "";
+            appData.wali.nama = document.getElementById('inputWaliNama').value || "";
+            appData.wali.quote = document.getElementById('inputWaliQuote').value || "";
+            
+            const waliFotoVal = document.getElementById('inputWaliFoto').value;
+            if (waliFotoVal) appData.wali.foto = waliFotoVal;
+
+            if (!appData.struktur) appData.struktur = {};
+
+            const ketuaFotoVal = document.getElementById('inputKetuaFoto').value;
+            appData.struktur.ketua = {
+                nama: document.getElementById('inputKetuaNama').value || "",
+                desc: "Pemimpin Umum Kelas",
+                foto: ketuaFotoVal || appData.struktur.ketua?.foto || "https://placehold.co/90x90/2563eb/ffffff?text=Ketua"
+            };
+
+            const wakilFotoVal = document.getElementById('inputWakilFoto').value;
+            appData.struktur.wakil = {
+                nama: document.getElementById('inputWakilNama').value || "",
+                desc: "Koordinator Internal & Acara",
+                foto: wakilFotoVal || appData.struktur.wakil?.foto || "https://placehold.co/90x90/0891b2/ffffff?text=Wakil"
+            };
+
+            const sek1FotoVal = document.getElementById('inputSek1Foto').value;
+            appData.struktur.sek1 = {
+                nama: document.getElementById('inputSek1Nama').value || "",
+                desc: "Administrasi & Absensi",
+                foto: sek1FotoVal || appData.struktur.sek1?.foto || "https://placehold.co/80x80/2563eb/ffffff?text=Sek1"
+            };
+
+            const sek2FotoVal = document.getElementById('inputSek2Foto').value;
+            appData.struktur.sek2 = {
+                nama: document.getElementById('inputSek2Nama').value || "",
+                desc: "Surat-menyurat",
+                foto: sek2FotoVal || appData.struktur.sek2?.foto || "https://placehold.co/80x80/3b82f6/ffffff?text=Sek2"
+            };
+
+            const ben1FotoVal = document.getElementById('inputBen1Foto').value;
+            appData.struktur.ben1 = {
+                nama: document.getElementById('inputBen1Nama').value || "",
+                desc: "Pengelola Keuangan Utama",
+                foto: ben1FotoVal || appData.struktur.ben1?.foto || "https://placehold.co/80x80/0891b2/ffffff?text=Ben1"
+            };
+
+            const ben2FotoVal = document.getElementById('inputBen2Foto').value;
+            appData.struktur.ben2 = {
+                nama: document.getElementById('inputBen2Nama').value || "",
+                desc: "Pencatatan Kas & Iuaran",
+                foto: ben2FotoVal || appData.struktur.ben2?.foto || "https://placehold.co/80x80/06b6d4/ffffff?text=Ben2"
+            };
+
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            showToast("Foto & data kelas berhasil diperbarui ke web publik!");
+        }
+
+        // Student Management Functions
+        function renderAdminStudents() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            const siswaList = appData.siswa || [];
+            document.getElementById('studentsBadge').innerText = siswaList.length;
+            const tbody = document.getElementById('adminStudentsTableBody');
+
+            if (siswaList.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-500">Belum ada data siswa.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = siswaList.map((s, idx) => `
+                <tr class="hover:bg-slate-950/50 transition">
+                    <td class="py-3 px-4 font-bold text-blue-400">${s.absen}</td>
+                    <td class="py-3 px-4">
+                        <img src="${s.foto || 'https://placehold.co/50x50/2563eb/ffffff?text=Siswa'}" class="w-10 h-10 rounded-xl object-cover border border-slate-800" onerror="this.src='https://placehold.co/50x50/2563eb/ffffff?text=Siswa'">
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-white">${s.nama}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded text-xs font-bold ${s.gender === 'L' ? 'bg-blue-500/20 text-blue-400' : 'bg-pink-500/20 text-pink-400'}">${s.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
+                    </td>
+                    <td class="py-3 px-4 text-slate-400">${s.hobi || '-'}</td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <button onclick="openEditStudentModal(${idx})" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg text-xs font-bold transition">Edit</button>
+                            <button onclick="deleteStudent(${idx})" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-lg text-xs font-bold transition">Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openAddStudentModal() {
+            isEditingStudent = false;
+            document.getElementById('modalStudentTitle').innerText = "Tambah Siswa Baru";
+            document.getElementById('studentForm').reset();
+            document.getElementById('editStudentOriginalAbsen').value = "";
+            document.getElementById('inputSiswaFoto').value = "";
+            document.getElementById('studentModal').classList.remove('hidden');
+        }
+
+        function openEditStudentModal(index) {
+            isEditingStudent = true;
+            document.getElementById('modalStudentTitle').innerText = "Edit Anggota Siswa";
+            const s = appData.siswa[index];
+            document.getElementById('editStudentOriginalAbsen').value = index;
+            document.getElementById('inputSiswaAbsen').value = s.absen;
+            document.getElementById('inputSiswaGender').value = s.gender;
+            document.getElementById('inputSiswaNama').value = s.nama;
+            document.getElementById('inputSiswaHobi').value = s.hobi || "";
+            document.getElementById('inputSiswaFoto').value = s.foto || "";
+            document.getElementById('studentModal').classList.remove('hidden');
+        }
+
+        function closeStudentModal() {
+            document.getElementById('studentModal').classList.add('hidden');
+        }
+
+        function handleSaveStudent(e) {
+            e.preventDefault();
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            if (!appData.siswa) appData.siswa = [];
+
+            const absen = parseInt(document.getElementById('inputSiswaAbsen').value);
+            const gender = document.getElementById('inputSiswaGender').value;
+            const nama = document.getElementById('inputSiswaNama').value.trim();
+            const hobi = document.getElementById('inputSiswaHobi').value.trim();
+            const foto = document.getElementById('inputSiswaFoto').value || (isEditingStudent ? appData.siswa[document.getElementById('editStudentOriginalAbsen').value].foto : `https://placehold.co/100x100/2563eb/ffffff?text=${encodeURIComponent(nama.charAt(0))}`);
+
+            if (isEditingStudent) {
+                const idx = parseInt(document.getElementById('editStudentOriginalAbsen').value);
+                appData.siswa[idx] = { absen, gender, nama, hobi, foto };
+                showToast("Data siswa berhasil diperbarui!");
+            } else {
+                appData.siswa.push({ absen, gender, nama, hobi, foto });
+                appData.siswa.sort((a, b) => a.absen - b.absen);
+                showToast("Siswa baru berhasil ditambahkan!");
+            }
+
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            closeStudentModal();
+            renderAdminStudents();
+        }
+
+        function deleteStudent(index) {
+            if (confirm("Hapus siswa ini dari daftar kelas?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.siswa.splice(index, 1);
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminStudents();
+                showToast("Siswa berhasil dihapus.");
+            }
+        }
+
+        // Piket Management Functions
+        function renderAdminPiket() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            const piketObj = appData.piket || {};
+            const container = document.getElementById('adminPiketContainer');
+            const days = Object.keys(piketObj);
+
+            if (days.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">Belum ada jadwal piket.</div>`;
+                return;
+            }
+
+            container.innerHTML = days.map(day => {
+                const members = piketObj[day] || [];
+                return `
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between gap-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-bold text-white text-base">${day}</h4>
+                                <div class="flex gap-2">
+                                    <button onclick="openEditPiketModal('${day}')" class="px-3 py-1 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg text-xs font-bold transition">Edit</button>
+                                    <button onclick="deletePiketDay('${day}')" class="px-3 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-lg text-xs font-bold transition">Hapus</button>
+                                </div>
+                            </div>
+                            <ul class="space-y-1 mt-3">
+                                ${members.map((m, i) => `<li class="text-xs text-slate-300 bg-slate-900 px-3 py-1.5 rounded-lg flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-[10px]">${i+1}</span> ${m}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openAddPiketModal() {
+            document.getElementById('modalPiketTitle').innerText = "Tambah / Edit Jadwal Piket";
+            document.getElementById('piketForm').reset();
+            document.getElementById('piketModal').classList.remove('hidden');
+        }
+
+        function openEditPiketModal(day) {
+            document.getElementById('modalPiketTitle').innerText = `Edit Jadwal Piket: ${day}`;
+            document.getElementById('inputPiketHari').value = day;
+            const members = (appData.piket[day] || []).join(', ');
+            document.getElementById('inputPiketAnggota').value = members;
+            document.getElementById('piketModal').classList.remove('hidden');
+        }
+
+        function closePiketModal() {
+            document.getElementById('piketModal').classList.add('hidden');
+        }
+
+        function handleSavePiket(e) {
+            e.preventDefault();
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            if (!appData.piket) appData.piket = {};
+
+            const day = document.getElementById('inputPiketHari').value.trim();
+            const membersInput = document.getElementById('inputPiketAnggota').value.trim();
+            const members = membersInput.split(',').map(s => s.trim()).filter(s => s.length > 0);
+
+            appData.piket[day] = members;
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            closePiketModal();
+            renderAdminPiket();
+            showToast(`Jadwal piket hari ${day} berhasil disimpan!`);
+        }
+
+        function deletePiketDay(day) {
+            if (confirm(`Hapus jadwal piket hari ${day}?`)) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                delete appData.piket[day];
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminPiket();
+                showToast(`Jadwal piket hari ${day} dihapus.`);
+            }
+        }
+
+        function renderAdminMessages() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) {
+                appData = JSON.parse(raw);
+            }
+            const msgs = appData.messages || [];
+            document.getElementById('inboxBadge').innerText = msgs.length;
+            const container = document.getElementById('adminMessagesContainer');
+
+            if (msgs.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-500 font-medium">Belum ada pesan masuk di kotak pesan.</div>`;
+                return;
+            }
+
+            container.innerHTML = msgs.map(m => `
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-white text-base">${m.name}</span>
+                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">Untuk: ${m.target}</span>
+                        </div>
+                        <p class="text-slate-300 text-sm mt-1">${m.content}</p>
+                        <span class="text-[11px] text-slate-500 block">${m.time}</span>
+                    </div>
+                    <button onclick="deleteMessage(${m.id})" class="px-3.5 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-bold rounded-xl transition flex items-center gap-1.5 flex-shrink-0">
+                        <i class="fa-solid fa-trash"></i> Hapus
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function deleteMessage(id) {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            appData.messages = (appData.messages || []).filter(m => m.id !== id);
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            renderAdminMessages();
+            showToast("Pesan berhasil dihapus.");
+        }
+
+        function clearAllMessages() {
+            if (confirm("Hapus seluruh pesan masuk?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.messages = [];
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminMessages();
+                showToast("Semua pesan telah dibersihkan.");
+            }
+        }
+
+        function resetDefaultData() {
+            if (confirm("Kembalikan seluruh data ke pengaturan awal?")) {
+                appData = JSON.parse(JSON.stringify(defaultData));
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                loadFormValues();
+                renderAdminMessages();
+                renderAdminStudents();
+                renderAdminPiket();
+                showToast("Data di-reset ke default.");
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+```
