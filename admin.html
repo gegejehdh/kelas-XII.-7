@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
@@ -63,7 +64,7 @@
                         <i class="fa-solid fa-circle-dot animate-pulse"></i> Sesi Pemegang Tunggal Aktif
                     </div>
                     <h1 class="text-3xl font-extrabold tracking-tight text-white">Panel Kontrol Khusus Pengurus</h1>
-                    <p class="text-blue-200 text-sm mt-1">Unggah foto pengurus, kelola daftar siswa, jadwal piket, & seluruh informasi kelas.</p>
+                    <p class="text-blue-200 text-sm mt-1">Kelola galeri foto, video dokumentasi, siswa, piket, & seluruh informasi kelas.</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <a href="index.html" target="_blank" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg transition flex items-center gap-2">
@@ -78,16 +79,19 @@
             <!-- Tab Menu -->
             <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4">
                 <button onclick="switchTab('inbox')" id="tabBtnInbox" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-inbox"></i> Kotak Masuk Pesan (<span id="inboxBadge">0</span>)
+                    <i class="fa-solid fa-inbox"></i> Kotak Masuk (<span id="inboxBadge">0</span>)
+                </button>
+                <button onclick="switchTab('media')" id="tabBtnMedia" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-photo-film"></i> Kelola Foto & Video
                 </button>
                 <button onclick="switchTab('settings')" id="tabBtnSettings" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-sliders"></i> Pengaturan Konten & Foto
+                    <i class="fa-solid fa-sliders"></i> Profil & Info Web
                 </button>
                 <button onclick="switchTab('students')" id="tabBtnStudents" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-users-gear"></i> Kelola Anggota Siswa (<span id="studentsBadge">0</span>)
+                    <i class="fa-solid fa-users-gear"></i> Anggota Siswa (<span id="studentsBadge">0</span>)
                 </button>
                 <button onclick="switchTab('piket')" id="tabBtnPiket" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-broom"></i> Kelola Jadwal Piket
+                    <i class="fa-solid fa-broom"></i> Jadwal Piket
                 </button>
             </div>
 
@@ -97,23 +101,71 @@
                     <div class="flex items-center justify-between mb-6">
                         <div>
                             <h3 class="text-xl font-bold text-white">Kotak Masuk Pesan Publik</h3>
-                            <p class="text-xs text-slate-400 mt-1">Pesan rahasia yang dikirim pengunjung melalui dinding pesan web publik.</p>
+                            <p class="text-xs text-slate-400 mt-1">Pesan yang dikirim pengunjung melalui dinding pesan web publik.</p>
                         </div>
                         <button onclick="clearAllMessages()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-bold rounded-xl transition border border-rose-500/30">
                             Hapus Semua Pesan
                         </button>
                     </div>
-                    
                     <div class="space-y-4 max-h-[600px] overflow-y-auto pr-2" id="adminMessagesContainer"></div>
                 </div>
             </div>
 
-            <!-- TAB 2: PENGATURAN KONTEN & FOTO -->
+            <!-- TAB 2: KELOLA FOTO & VIDEO -->
+            <div id="tabMedia" class="hidden space-y-6">
+                <!-- Subtab Foto Kenangan -->
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Galeri Foto Kegiatan</h3>
+                            <p class="text-xs text-slate-400 mt-1">Tambah atau hapus foto momen kelas beserta keterangannya.</p>
+                        </div>
+                        <button onclick="openAddMemoryModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+                            <i class="fa-solid fa-camera"></i> Tambah Foto Baru
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminMemoriesContainer"></div>
+                </div>
+
+                <!-- Subtab Video Dokumentasi -->
+                <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Video Dokumentasi Kelas</h3>
+                            <p class="text-xs text-slate-400 mt-1">Unggah video langsung dari galeri perangkat atau masukkan tautan YouTube.</p>
+                        </div>
+                        <button onclick="openAddVideoModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2">
+                            <i class="fa-solid fa-video"></i> Tambah Video Baru
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="adminVideosContainer"></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: PENGATURAN INFO & PENGURUS -->
             <div id="tabSettings" class="hidden space-y-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-pen-to-square text-blue-400"></i> Ubah Identitas, Informasi & Unggah Foto
+                        <i class="fa-solid fa-pen-to-square text-blue-400"></i> Ubah Identitas, Informasi & Foto Profil Website
                     </h3>
+
+                    <!-- Pengaturan Profil/Hero Banner Utama -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+                        <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Foto Latar Belakang / Banner Hero Website Publik</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Profil Banner Utama</label>
+                                <input type="file" id="inputBannerFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputBannerFoto')" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputBannerFoto">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Pratinjau Banner Saat Ini</label>
+                                <div class="w-full h-24 rounded-xl overflow-hidden border border-slate-800 bg-slate-900">
+                                    <img id="previewBannerImg" src="" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
@@ -144,36 +196,34 @@
                                 <input type="text" id="inputWaliQuote" class="w-full px-4 py-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah File Foto Wali Kelas</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Wali Kelas</label>
                                 <input type="file" id="inputWaliFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputWaliFoto')" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer mb-2">
                                 <input type="hidden" id="inputWaliFoto">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pengaturan Struktur Bagan Inti (Tree Hierarchy) dengan Unggah Foto -->
+                    <!-- Struktur Inti -->
                     <div class="pt-4 border-t border-slate-800 space-y-6">
                         <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Pengaturan Struktur Bagan & Unggah Foto Pengurus</h4>
 
-                        <!-- Ketua & Wakil -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Ketua Kelas</label>
                                 <input type="text" id="inputKetuaNama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Ketua Kelas</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Ketua</label>
                                 <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputKetuaFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
                                 <input type="hidden" id="inputKetuaFoto">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Wakil Ketua</label>
                                 <input type="text" id="inputWakilNama" class="w-full px-4 py-3 bg-slate-900 rounded-xl border border-slate-800 text-sm text-white mb-2">
-                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Wakil Ketua</label>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Wakil</label>
                                 <input type="file" accept="image/*" onchange="previewAndConvertImage(event, 'inputWakilFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
                                 <input type="hidden" id="inputWakilFoto">
                             </div>
                         </div>
 
-                        <!-- Sekretaris 1 & 2 -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Sekretaris 1</label>
@@ -191,7 +241,6 @@
                             </div>
                         </div>
 
-                        <!-- Bendahara 1 & 2 -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-950 p-5 rounded-2xl border border-slate-800">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Nama Bendahara 1</label>
@@ -221,7 +270,7 @@
                 </div>
             </div>
 
-            <!-- TAB 3: KELOLA SISWA -->
+            <!-- TAB 4: KELOLA SISWA -->
             <div id="tabStudents" class="hidden space-y-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -252,7 +301,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: KELOLA JADWAL PIKET -->
+            <!-- TAB 5: KELOLA JADWAL PIKET -->
             <div id="tabPiket" class="hidden space-y-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -268,6 +317,65 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="adminPiketContainer"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH FOTO KENANGAN -->
+    <div id="memoryModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <h3 class="text-xl font-bold text-white">Tambah Foto Kenangan Baru</h3>
+            <form onsubmit="handleSaveMemory(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Judul / Acara</label>
+                    <input type="text" id="inputMemTitle" required placeholder="Contoh: Study Tour" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tanggal</label>
+                    <input type="text" id="inputMemDate" required placeholder="Contoh: 15 Mei 2026" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Keterangan / Deskripsi Foto</label>
+                    <textarea id="inputMemDesc" rows="2" placeholder="Ceritakan sedikit tentang momen foto ini..." class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah File Foto dari Galeri</label>
+                    <input type="file" id="inputMemFile" accept="image/*" required onchange="previewAndConvertImage(event, 'inputMemFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer mb-2">
+                    <input type="hidden" id="inputMemFoto">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" class="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition">Simpan Foto</button>
+                    <button type="button" onclick="closeMemoryModal()" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl transition">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH VIDEO -->
+    <div id="videoModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md px-4">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+            <h3 class="text-xl font-bold text-white">Tambah Video Dokumentasi</h3>
+            <form onsubmit="handleSaveVideo(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Judul Video</label>
+                    <input type="text" id="inputVidTitle" required placeholder="Contoh: Teaser Profil Kelas" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Keterangan / Deskripsi Video</label>
+                    <textarea id="inputVidDesc" rows="2" placeholder="Keterangan singkat tentang video ini..." class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white"></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Sumber Video</label>
+                    <div class="space-y-2">
+                        <input type="text" id="inputVidUrl" placeholder="Tautan YouTube (misal: https://www.youtube.com/watch?v=...)" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
+                        <div class="text-center text-xs text-slate-500 font-bold">--- ATAU ---</div>
+                        <input type="file" id="inputVidFile" accept="video/*" onchange="previewAndConvertVideo(event, 'inputVidUrl')" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="submit" class="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition">Simpan Video</button>
+                    <button type="button" onclick="closeVideoModal()" class="px-5 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl transition">Batal</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -299,7 +407,7 @@
                     <input type="text" id="inputSiswaHobi" placeholder="Contoh: Sepak Bola" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Siswa</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Foto Siswa dari Galeri</label>
                     <input type="file" id="inputSiswaFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputSiswaFoto')" class="w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer mb-2">
                     <input type="hidden" id="inputSiswaFoto">
                 </div>
@@ -322,7 +430,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Daftar Nama Petugas (Pisahkan dengan koma)</label>
-                    <textarea id="inputPiketAnggota" required rows="4" placeholder="Contoh: Ahmad Zaki, Alya Nabila, Andika Pratama" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white"></textarea>
+                    <textarea id="inputPiketAnggota" required rows="4" placeholder="Contoh: Ahmad Zaki, Alya Nabila" class="w-full px-4 py-3 bg-slate-950 rounded-xl border border-slate-800 text-sm text-white"></textarea>
                 </div>
                 <div class="flex gap-3 pt-2">
                     <button type="submit" class="flex-1 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg transition">Simpan Jadwal</button>
@@ -342,7 +450,8 @@
         const defaultData = {
             className: "XII IPA 1",
             heroBadge: "Angkatan Aktif • Solid & Berprestasi",
-            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            bannerFoto: "https://placehold.co/1200x600/1e293b/38bdf8?text=Banner+Utama+Kelas",
             wali: {
                 nama: "Drs. H. Ahmad Fauzi, M.Pd.",
                 quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten.",
@@ -371,6 +480,14 @@
                 "Kamis": ["Nadia Safitri", "Reza Pahlevi", "Salsabila Putri"],
                 "Jumat": ["Seluruh Anggota Kelas (Piket Bersama)"]
             },
+            memories: [
+                { id: 1, title: "Keseruan Perayaan HUT RI", date: "17 Agustus 2025", desc: "Momen seru perlombaan 17an di sekolah.", foto: "https://placehold.co/600x400/2563eb/ffffff?text=Lomba+17+Agustus" },
+                { id: 2, title: "Studi Wisata Laboratorium Sains", date: "10 Januari 2026", desc: "Kunjungan edukatif ke lab kimia & biologi.", foto: "https://placehold.co/600x400/0891b2/ffffff?text=Studi+Wisata" },
+                { id: 3, title: "Malam Keakraban Kelas", date: "28 Februari 2026", desc: "Kebersamaan dan kehangatan antar anggota kelas.", foto: "https://placehold.co/600x400/3b82f6/ffffff?text=Makrab+Kelas" }
+            ],
+            videos: [
+                { id: 1, title: "Teaser Profil Kelas XII IPA 1", desc: "Video persembahan spesial dokumentasi kelas.", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", isFile: false }
+            ],
             messages: [
                 { id: 1, name: "Geril Suardi", target: "Wali Kelas", content: "Semangat terus untuk seluruh warga kelas XII IPA 1!", time: "Baru saja" }
             ]
@@ -386,9 +503,7 @@
             }
             window.addEventListener('focus', () => {
                 if (localStorage.getItem('exclusiveAdminSession') === 'true') {
-                    renderAdminMessages();
-                    renderAdminStudents();
-                    renderAdminPiket();
+                    renderAdminAll();
                 }
             });
         });
@@ -410,9 +525,7 @@
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('adminDashboard').classList.remove('hidden');
             loadFormValues();
-            renderAdminMessages();
-            renderAdminStudents();
-            renderAdminPiket();
+            renderAdminAll();
         }
 
         function adminLogout() {
@@ -425,29 +538,30 @@
 
         function switchTab(tab) {
             const inboxEl = document.getElementById('tabInbox');
+            const mediaEl = document.getElementById('tabMedia');
             const settingsEl = document.getElementById('tabSettings');
             const studentsEl = document.getElementById('tabStudents');
             const piketEl = document.getElementById('tabPiket');
 
             const btnInbox = document.getElementById('tabBtnInbox');
+            const btnMedia = document.getElementById('tabBtnMedia');
             const btnSettings = document.getElementById('tabBtnSettings');
             const btnStudents = document.getElementById('tabBtnStudents');
             const btnPiket = document.getElementById('tabBtnPiket');
 
-            inboxEl.classList.add('hidden');
-            settingsEl.classList.add('hidden');
-            studentsEl.classList.add('hidden');
-            piketEl.classList.add('hidden');
-
-            btnInbox.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
-            btnSettings.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
-            btnStudents.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
-            btnPiket.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+            [inboxEl, mediaEl, settingsEl, studentsEl, piketEl].forEach(el => el.classList.add('hidden'));
+            [btnInbox, btnMedia, btnSettings, btnStudents, btnPiket].forEach(b => {
+                b.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-900 text-slate-400 hover:text-white transition flex items-center gap-2";
+            });
 
             if (tab === 'inbox') {
                 inboxEl.classList.remove('hidden');
                 btnInbox.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
                 renderAdminMessages();
+            } else if (tab === 'media') {
+                mediaEl.classList.remove('hidden');
+                btnMedia.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
+                renderAdminMedia();
             } else if (tab === 'settings') {
                 settingsEl.classList.remove('hidden');
                 btnSettings.className = "px-5 py-2.5 rounded-xl font-bold text-sm bg-blue-600 text-white transition flex items-center gap-2";
@@ -463,13 +577,36 @@
             }
         }
 
+        function renderAdminAll() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            renderAdminMessages();
+            renderAdminMedia();
+            renderAdminStudents();
+            renderAdminPiket();
+        }
+
         function previewAndConvertImage(event, targetHiddenId) {
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById(targetHiddenId).value = e.target.result;
-                showToast("Foto berhasil dimuat ke memori sementara!");
+                if (targetHiddenId === 'inputBannerFoto') {
+                    document.getElementById('previewBannerImg').src = e.target.result;
+                }
+                showToast("File foto berhasil dimuat!");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewAndConvertVideo(event, targetInputId) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(targetInputId).value = e.target.result;
+                showToast("File video berhasil dimuat dari galeri!");
             };
             reader.readAsDataURL(file);
         }
@@ -480,6 +617,11 @@
             document.getElementById('inputClassName').value = appData.className;
             document.getElementById('inputHeroBadge').value = appData.heroBadge;
             document.getElementById('inputTagline').value = appData.tagline;
+            
+            const bannerFotoVal = appData.bannerFoto || defaultData.bannerFoto;
+            document.getElementById('inputBannerFoto').value = bannerFotoVal;
+            document.getElementById('previewBannerImg').src = bannerFotoVal;
+
             document.getElementById('inputWaliNama').value = appData.wali.nama;
             document.getElementById('inputWaliQuote').value = appData.wali.quote;
             document.getElementById('inputWaliFoto').value = appData.wali.foto;
@@ -520,6 +662,10 @@
             appData.className = document.getElementById('inputClassName').value || "XII IPA 1";
             appData.heroBadge = document.getElementById('inputHeroBadge').value || "";
             appData.tagline = document.getElementById('inputTagline').value || "";
+            
+            const bannerFotoVal = document.getElementById('inputBannerFoto').value;
+            if (bannerFotoVal) appData.bannerFoto = bannerFotoVal;
+
             appData.wali.nama = document.getElementById('inputWaliNama').value || "";
             appData.wali.quote = document.getElementById('inputWaliQuote').value || "";
             
@@ -571,10 +717,204 @@
             };
 
             localStorage.setItem('classPortalData', JSON.stringify(appData));
-            showToast("Foto & data kelas berhasil diperbarui ke web publik!");
+            showToast("Informasi & foto profil website berhasil diperbarui!");
         }
 
-        // Student Management Functions
+        function resetDefaultData() {
+            if (confirm("Reset seluruh data ke pengaturan awal?")) {
+                localStorage.setItem('classPortalData', JSON.stringify(defaultData));
+                appData = defaultData;
+                loadFormValues();
+                renderAdminAll();
+                showToast("Data dikembalikan ke default.");
+            }
+        }
+
+        // Messages Management
+        function renderAdminMessages() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            const messages = appData.messages || [];
+            document.getElementById('inboxBadge').innerText = messages.length;
+            const container = document.getElementById('adminMessagesContainer');
+
+            if (messages.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-slate-500 font-medium">Kotak masuk masih kosong.</div>`;
+                return;
+            }
+
+            container.innerHTML = messages.map(m => `
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-white text-sm">${m.name}</span>
+                            <span class="text-xs text-slate-400">untuk <strong class="text-blue-400">${m.target}</strong></span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-400">${m.time}</span>
+                        </div>
+                        <p class="text-sm text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800/80 mt-2">${m.content}</p>
+                    </div>
+                    <button onclick="deleteMessage(${m.id})" class="px-3 py-2 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-xl hover:bg-rose-500/30 transition flex-shrink-0">
+                        Hapus
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function deleteMessage(id) {
+            if (confirm("Hapus pesan ini?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.messages = (appData.messages || []).filter(m => m.id !== id);
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminMessages();
+                showToast("Pesan dihapus.");
+            }
+        }
+
+        function clearAllMessages() {
+            if (confirm("Hapus semua pesan di kotak masuk?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.messages = [];
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminMessages();
+                showToast("Semua pesan telah dibersihkan.");
+            }
+        }
+
+        // Media Management (Foto & Video)
+        function renderAdminMedia() {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            
+            // Render memories (Photos)
+            const memContainer = document.getElementById('adminMemoriesContainer');
+            const memories = appData.memories || [];
+            if (memories.length === 0) {
+                memContainer.innerHTML = `<div class="col-span-full text-center py-6 text-slate-500">Belum ada foto.</div>`;
+            } else {
+                memContainer.innerHTML = memories.map(m => `
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <img src="${m.foto}" class="w-14 h-14 rounded-xl object-cover flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <h5 class="font-bold text-white text-xs truncate">${m.title}</h5>
+                                <span class="text-[10px] text-blue-400 block">${m.date}</span>
+                                <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">${m.desc || 'Tanpa keterangan'}</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-end pt-2 border-t border-slate-900">
+                            <button onclick="deleteMemory(${m.id})" class="px-3 py-1 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-lg hover:bg-rose-500/30">Hapus</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Videos
+            const vidContainer = document.getElementById('adminVideosContainer');
+            const videos = appData.videos || [];
+            if (videos.length === 0) {
+                vidContainer.innerHTML = `<div class="col-span-full text-center py-6 text-slate-500">Belum ada video.</div>`;
+            } else {
+                vidContainer.innerHTML = videos.map(v => `
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-col justify-between gap-3">
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <h5 class="font-bold text-white text-xs truncate"><i class="fa-solid fa-video text-blue-400 mr-1.5"></i> ${v.title}</h5>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">${v.isFile ? 'Dari Galeri' : 'YouTube'}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 mt-1">${v.desc || 'Tanpa keterangan'}</p>
+                        </div>
+                        <div class="flex justify-end pt-2 border-t border-slate-900">
+                            <button onclick="deleteVideo(${v.id})" class="px-3 py-1 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-lg hover:bg-rose-500/30">Hapus</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function openAddMemoryModal() {
+            document.getElementById('inputMemTitle').value = "";
+            document.getElementById('inputMemDate').value = "";
+            document.getElementById('inputMemDesc').value = "";
+            document.getElementById('inputMemFoto').value = "";
+            document.getElementById('inputMemFile').value = "";
+            document.getElementById('memoryModal').classList.remove('hidden');
+        }
+        function closeMemoryModal() { document.getElementById('memoryModal').classList.add('hidden'); }
+
+        function handleSaveMemory(e) {
+            e.preventDefault();
+            const title = document.getElementById('inputMemTitle').value.trim();
+            const date = document.getElementById('inputMemDate').value.trim();
+            const desc = document.getElementById('inputMemDesc').value.trim();
+            const foto = document.getElementById('inputMemFoto').value;
+            if (!title || !date || !foto) return;
+
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            if (!appData.memories) appData.memories = [];
+            appData.memories.unshift({ id: Date.now(), title, date, desc, foto });
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            closeMemoryModal();
+            renderAdminMedia();
+            showToast("Foto kenangan berhasil ditambahkan!");
+        }
+
+        function deleteMemory(id) {
+            if (confirm("Hapus foto ini?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.memories = (appData.memories || []).filter(m => m.id !== id);
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminMedia();
+                showToast("Foto berhasil dihapus.");
+            }
+        }
+
+        function openAddVideoModal() {
+            document.getElementById('inputVidTitle').value = "";
+            document.getElementById('inputVidDesc').value = "";
+            document.getElementById('inputVidUrl').value = "";
+            document.getElementById('inputVidFile').value = "";
+            document.getElementById('videoModal').classList.remove('hidden');
+        }
+        function closeVideoModal() { document.getElementById('videoModal').classList.add('hidden'); }
+
+        function handleSaveVideo(e) {
+            e.preventDefault();
+            const title = document.getElementById('inputVidTitle').value.trim();
+            const desc = document.getElementById('inputVidDesc').value.trim();
+            const url = document.getElementById('inputVidUrl').value.trim();
+            if (!title || !url) {
+                showToast("Judul dan sumber video wajib diisi!");
+                return;
+            }
+
+            const isFile = url.startsWith('data:video');
+
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            if (!appData.videos) appData.videos = [];
+            appData.videos.unshift({ id: Date.now(), title, desc, url, isFile });
+            localStorage.setItem('classPortalData', JSON.stringify(appData));
+            closeVideoModal();
+            renderAdminMedia();
+            showToast("Video dokumentasi berhasil ditambahkan!");
+        }
+
+        function deleteVideo(id) {
+            if (confirm("Hapus video ini?")) {
+                const raw = localStorage.getItem('classPortalData');
+                if (raw) appData = JSON.parse(raw);
+                appData.videos = (appData.videos || []).filter(v => v.id !== id);
+                localStorage.setItem('classPortalData', JSON.stringify(appData));
+                renderAdminMedia();
+                showToast("Video berhasil dihapus.");
+            }
+        }
+
+        // Student Management
         function renderAdminStudents() {
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
@@ -591,7 +931,7 @@
                 <tr class="hover:bg-slate-950/50 transition">
                     <td class="py-3 px-4 font-bold text-blue-400">${s.absen}</td>
                     <td class="py-3 px-4">
-                        <img src="${s.foto || 'https://placehold.co/50x50/2563eb/ffffff?text=Siswa'}" class="w-10 h-10 rounded-xl object-cover border border-slate-800" onerror="this.src='https://placehold.co/50x50/2563eb/ffffff?text=Siswa'">
+                        <img src="${s.foto || 'https://placehold.co/50x50/2563eb/ffffff?text=Siswa'}" class="w-10 h-10 rounded-xl object-cover border border-slate-800">
                     </td>
                     <td class="py-3 px-4 font-semibold text-white">${s.nama}</td>
                     <td class="py-3 px-4">
@@ -630,9 +970,7 @@
             document.getElementById('studentModal').classList.remove('hidden');
         }
 
-        function closeStudentModal() {
-            document.getElementById('studentModal').classList.add('hidden');
-        }
+        function closeStudentModal() { document.getElementById('studentModal').classList.add('hidden'); }
 
         function handleSaveStudent(e) {
             e.preventDefault();
@@ -649,11 +987,11 @@
             if (isEditingStudent) {
                 const idx = parseInt(document.getElementById('editStudentOriginalAbsen').value);
                 appData.siswa[idx] = { absen, gender, nama, hobi, foto };
-                showToast("Data siswa berhasil diperbarui!");
+                showToast("Data siswa diperbarui!");
             } else {
                 appData.siswa.push({ absen, gender, nama, hobi, foto });
                 appData.siswa.sort((a, b) => a.absen - b.absen);
-                showToast("Siswa baru berhasil ditambahkan!");
+                showToast("Siswa baru ditambahkan!");
             }
 
             localStorage.setItem('classPortalData', JSON.stringify(appData));
@@ -662,7 +1000,7 @@
         }
 
         function deleteStudent(index) {
-            if (confirm("Hapus siswa ini dari daftar kelas?")) {
+            if (confirm("Hapus siswa ini?")) {
                 const raw = localStorage.getItem('classPortalData');
                 if (raw) appData = JSON.parse(raw);
                 appData.siswa.splice(index, 1);
@@ -672,38 +1010,30 @@
             }
         }
 
-        // Piket Management Functions
+        // Piket Management
         function renderAdminPiket() {
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
             const piketObj = appData.piket || {};
             const container = document.getElementById('adminPiketContainer');
-            const days = Object.keys(piketObj);
 
-            if (days.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-500">Belum ada jadwal piket.</div>`;
-                return;
-            }
-
-            container.innerHTML = days.map(day => {
-                const members = piketObj[day] || [];
-                return `
-                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between gap-4">
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <h4 class="font-bold text-white text-base">${day}</h4>
-                                <div class="flex gap-2">
-                                    <button onclick="openEditPiketModal('${day}')" class="px-3 py-1 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg text-xs font-bold transition">Edit</button>
-                                    <button onclick="deletePiketDay('${day}')" class="px-3 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-lg text-xs font-bold transition">Hapus</button>
-                                </div>
-                            </div>
-                            <ul class="space-y-1 mt-3">
-                                ${members.map((m, i) => `<li class="text-xs text-slate-300 bg-slate-900 px-3 py-1.5 rounded-lg flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-[10px]">${i+1}</span> ${m}</li>`).join('')}
-                            </ul>
+            container.innerHTML = Object.entries(piketObj).map(([day, members]) => `
+                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between gap-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-white text-base">${day}</h4>
+                            <span class="text-xs px-2.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">${members.length} Petugas</span>
                         </div>
+                        <ul class="space-y-1 text-sm text-slate-300">
+                            ${members.map(m => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400 text-xs"></i> ${m}</li>`).join('')}
+                        </ul>
                     </div>
-                `;
-            }).join('');
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-900">
+                        <button onclick="openEditPiket('${day}')" class="px-3 py-1.5 bg-blue-600/20 text-blue-400 text-xs font-bold rounded-lg hover:bg-blue-600/30">Edit Piket</button>
+                        <button onclick="deletePiketDay('${day}')" class="px-3 py-1.5 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-lg hover:bg-rose-500/30">Hapus Hari</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function openAddPiketModal() {
@@ -712,106 +1042,41 @@
             document.getElementById('piketModal').classList.remove('hidden');
         }
 
-        function openEditPiketModal(day) {
-            document.getElementById('modalPiketTitle').innerText = `Edit Jadwal Piket: ${day}`;
+        function openEditPiket(day) {
+            document.getElementById('modalPiketTitle').innerText = `Edit Piket Hari ${day}`;
             document.getElementById('inputPiketHari').value = day;
-            const members = (appData.piket[day] || []).join(', ');
-            document.getElementById('inputPiketAnggota').value = members;
+            const members = appData.piket[day] || [];
+            document.getElementById('inputPiketAnggota').value = members.join(", ");
             document.getElementById('piketModal').classList.remove('hidden');
         }
 
-        function closePiketModal() {
-            document.getElementById('piketModal').classList.add('hidden');
-        }
+        function closePiketModal() { document.getElementById('piketModal').classList.add('hidden'); }
 
         function handleSavePiket(e) {
             e.preventDefault();
+            const day = document.getElementById('inputPiketHari').value.trim();
+            const anggotaRaw = document.getElementById('inputPiketAnggota').value.trim();
+            const members = anggotaRaw.split(',').map(m => m.trim()).filter(m => m.length > 0);
+
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
             if (!appData.piket) appData.piket = {};
-
-            const day = document.getElementById('inputPiketHari').value.trim();
-            const membersInput = document.getElementById('inputPiketAnggota').value.trim();
-            const members = membersInput.split(',').map(s => s.trim()).filter(s => s.length > 0);
-
             appData.piket[day] = members;
+
             localStorage.setItem('classPortalData', JSON.stringify(appData));
             closePiketModal();
             renderAdminPiket();
-            showToast(`Jadwal piket hari ${day} berhasil disimpan!`);
+            showToast("Jadwal piket berhasil diperbarui!");
         }
 
         function deletePiketDay(day) {
             if (confirm(`Hapus jadwal piket hari ${day}?`)) {
                 const raw = localStorage.getItem('classPortalData');
-                if (raw) appData = JSON.parse(raw);
+                if (raw) appData = JSON.file ? JSON.parse(raw) : JSON.parse(raw);
                 delete appData.piket[day];
                 localStorage.setItem('classPortalData', JSON.stringify(appData));
                 renderAdminPiket();
-                showToast(`Jadwal piket hari ${day} dihapus.`);
-            }
-        }
-
-        function renderAdminMessages() {
-            const raw = localStorage.getItem('classPortalData');
-            if (raw) {
-                appData = JSON.parse(raw);
-            }
-            const msgs = appData.messages || [];
-            document.getElementById('inboxBadge').innerText = msgs.length;
-            const container = document.getElementById('adminMessagesContainer');
-
-            if (msgs.length === 0) {
-                container.innerHTML = `<div class="text-center py-12 text-slate-500 font-medium">Belum ada pesan masuk di kotak pesan.</div>`;
-                return;
-            }
-
-            container.innerHTML = msgs.map(m => `
-                <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div class="space-y-1">
-                        <div class="flex items-center gap-2">
-                            <span class="font-bold text-white text-base">${m.name}</span>
-                            <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30">Untuk: ${m.target}</span>
-                        </div>
-                        <p class="text-slate-300 text-sm mt-1">${m.content}</p>
-                        <span class="text-[11px] text-slate-500 block">${m.time}</span>
-                    </div>
-                    <button onclick="deleteMessage(${m.id})" class="px-3.5 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-bold rounded-xl transition flex items-center gap-1.5 flex-shrink-0">
-                        <i class="fa-solid fa-trash"></i> Hapus
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function deleteMessage(id) {
-            const raw = localStorage.getItem('classPortalData');
-            if (raw) appData = JSON.parse(raw);
-            appData.messages = (appData.messages || []).filter(m => m.id !== id);
-            localStorage.setItem('classPortalData', JSON.stringify(appData));
-            renderAdminMessages();
-            showToast("Pesan berhasil dihapus.");
-        }
-
-        function clearAllMessages() {
-            if (confirm("Hapus seluruh pesan masuk?")) {
-                const raw = localStorage.getItem('classPortalData');
-                if (raw) appData = JSON.parse(raw);
-                appData.messages = [];
-                localStorage.setItem('classPortalData', JSON.stringify(appData));
-                renderAdminMessages();
-                showToast("Semua pesan telah dibersihkan.");
-            }
-        }
-
-        function resetDefaultData() {
-            if (confirm("Kembalikan seluruh data ke pengaturan awal?")) {
-                appData = JSON.parse(JSON.stringify(defaultData));
-                localStorage.setItem('classPortalData', JSON.stringify(appData));
-                loadFormValues();
-                renderAdminMessages();
-                renderAdminStudents();
-                renderAdminPiket();
-                showToast("Data di-reset ke default.");
+                showToast("Jadwal piket dihapus.");
             }
         }
 
