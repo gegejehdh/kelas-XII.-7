@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
@@ -94,7 +95,7 @@
                     </a>
                 </div>
 
-                <!-- Wali Kelas Spotlight Card (Tanpa Foto) -->
+                <!-- Wali Kelas Spotlight Card (Tanpa Foto Profil) -->
                 <div class="mt-20 max-w-lg mx-auto bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 text-center">
                     <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm border border-blue-100">
                         <i class="fa-solid fa-chalkboard-user"></i>
@@ -141,7 +142,7 @@
                             <div class="absolute right-0 top-0 w-0.5 h-6 bg-blue-300"></div>
                         </div>
 
-                        <!-- Level 2: Ketua & Wakil Ketua Kelas (Dengan Foto / Inisial) -->
+                        <!-- Level 2: Ketua & Wakil Ketua Kelas (Dengan Inisial) -->
                         <div class="w-full max-w-[640px] flex justify-between pt-6 gap-8">
                             <!-- Ketua Kelas -->
                             <div class="w-72 bg-white rounded-3xl p-5 text-center shadow-md border-2 border-blue-600 relative">
@@ -338,9 +339,9 @@
                 ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "https://placehold.co/120x120/2563eb/ffffff?text=Ketua" },
                 wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "https://placehold.co/120x120/0891b2/ffffff?text=Wakil" },
                 sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Sek1" },
-                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "" }, // Tanpa foto contoh
+                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "" }, // Tanpa foto -> Inisial AN
                 ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "https://placehold.co/100x100/0891b2/ffffff?text=Ben1" },
-                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "" } // Tanpa foto contoh
+                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "" } // Tanpa foto -> Inisial AF
             },
             siswa: [
                 { absen: 1, nama: "Ahmad Zaki", gender: "L", hobi: "Sepak Bola", foto: "https://placehold.co/160x160/2563eb/ffffff?text=Zaki" },
@@ -388,17 +389,18 @@
             });
         });
 
-        // Helper untuk menghasilkan inisial nama (maksimal 2 huruf)
+        // Helper untuk menghasilkan inisial nama persis seperti "Geril Suardi" -> "GS" (dua kata pertama)
         function getInitials(name) {
             if (!name || name === "-") return "-";
-            const parts = name.trim().split(" ");
+            const cleanName = name.trim();
+            const parts = cleanName.split(/\s+/);
             if (parts.length >= 2) {
                 return (parts[0][0] + parts[1][0]).toUpperCase();
             }
-            return name.substring(0, 2).toUpperCase();
+            return cleanName.substring(0, Math.min(2, cleanName.length)).toUpperCase();
         }
 
-        // Render komponen Avatar atau Kotak Inisial untuk Struktur / Siswa
+        // Render komponen Avatar foto atau kotak Inisial cantik (tanpa mencetak teks nama di dalam gambar)
         function renderAvatarBox(fotoUrl, name, sizeClass = "w-20 h-20", textClass = "text-xl") {
             if (fotoUrl && fotoUrl.trim() !== "") {
                 return `<img src="${fotoUrl}" alt="${name}" class="${sizeClass} rounded-2xl object-cover shadow border border-slate-100" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\' ${sizeClass} rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold ${textClass} flex items-center justify-center shadow\\'>' + getInitials('${name}') + '</div>';">`;
@@ -433,7 +435,7 @@
                 logoContainer.className = "w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0";
             }
 
-            // Wali Kelas (Tanpa foto sesuai permintaan)
+            // Wali Kelas (Tanpa foto profil)
             document.getElementById('waliNama').innerText = appData.wali.nama;
             document.getElementById('waliQuote').innerText = `"${appData.wali.quote}"`;
             document.getElementById('baganWaliNama').innerText = appData.wali.nama;
@@ -487,13 +489,7 @@
                 return;
             }
             container.innerHTML = list.map(s => {
-                let avatarHtml = "";
-                if (s.foto && s.foto.trim() !== "") {
-                    avatarHtml = `<img src="${s.foto}" alt="${s.nama}" class="w-20 h-20 rounded-xl object-cover shadow-sm border border-slate-100" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'w-20 h-20 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold text-lg flex items-center justify-center shadow-sm\\'>' + getInitials('${s.nama}') + '</div>';">`;
-                } else {
-                    avatarHtml = `<div class="w-20 h-20 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold text-lg flex items-center justify-center shadow-sm">${getInitials(s.nama)}</div>`;
-                }
-
+                let avatarHtml = renderAvatarBox(s.foto, s.nama, "w-20 h-20", "text-lg");
                 return `
                     <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col items-center text-center gap-2.5 hover:shadow-md transition">
                         ${avatarHtml}
@@ -636,4 +632,4 @@
     </script>
 </body>
 </html>
-``
+```
