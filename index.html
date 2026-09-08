@@ -35,8 +35,8 @@
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                <div id="navLogoContainer" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0">
+                    <i class="fa-solid fa-graduation-cap text-xl" id="navLogoIcon"></i>
                 </div>
                 <div>
                     <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Portal Resmi</span>
@@ -50,6 +50,7 @@
                 <a href="#struktur" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Struktur</a>
                 <a href="#siswa" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Daftar Siswa</a>
                 <a href="#piket" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Jadwal Piket</a>
+                <a href="#kenangan" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Galeri & Video</a>
                 <a href="#pesan" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Dinding Pesan</a>
             </nav>
 
@@ -64,12 +65,12 @@
             <a href="#struktur" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Struktur</a>
             <a href="#siswa" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Daftar Siswa</a>
             <a href="#piket" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Jadwal Piket</a>
+            <a href="#kenangan" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Galeri & Video</a>
             <a href="#pesan" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Dinding Pesan</a>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="beranda" class="relative pt-16 pb-24 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50">
             <div class="absolute inset-0 -z-10 opacity-30">
                 <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-300 rounded-full blur-3xl"></div>
@@ -82,7 +83,7 @@
                     Selamat Datang di Portal <br><span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent" id="heroClassName">XII IPA 1</span>
                 </h1>
                 <p class="max-w-2xl mx-auto text-lg text-slate-600 mb-10 leading-relaxed" id="heroTagline">
-                    Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!
+                    Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!
                 </p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="#siswa" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-xl shadow-blue-200 transition transform hover:-translate-y-0.5 flex items-center gap-3">
@@ -95,7 +96,7 @@
 
                 <!-- Wali Kelas Spotlight Card -->
                 <div class="mt-20 max-w-xl mx-auto bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 flex flex-col sm:flex-row items-center gap-6 text-left">
-                    <img id="waliFoto" src="https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas" alt="Wali Kelas" class="w-28 h-28 rounded-2xl object-cover shadow-md flex-shrink-0" onerror="this.src='https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas'">
+                    <img id="waliFoto" src="https://placehold.co/200x200/2563eb/ffffff?text=Wali+Kelas" alt="Wali Kelas" class="w-36 h-36 rounded-2xl object-cover shadow-md flex-shrink-0" onerror="this.src='https://placehold.co/200x200/2563eb/ffffff?text=Wali+Kelas'">
                     <div>
                         <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-bold rounded-lg mb-2">Wali Kelas Kami</span>
                         <h3 class="text-xl font-bold text-slate-900" id="waliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
@@ -109,7 +110,6 @@
             </div>
         </section>
 
-        <!-- Struktur Organisasi Section -->
         <section id="struktur" class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-16">
@@ -118,93 +118,85 @@
                     <p class="text-slate-600 mt-2">Bagan hirarki kepengurusan inti kelas secara formal dari Pembina hingga Pengurus.</p>
                 </div>
 
-                <!-- Bagan Struktur Formal (Org Chart Tree) -->
-                <div class="flex flex-col items-center overflow-x-auto py-4">
-                    <div class="min-w-[700px] flex flex-col items-center">
+                <!-- Bagan Struktur Formal (Org Chart Tree) dengan Scroll Center -->
+                <div class="w-full overflow-x-auto py-6 px-4">
+                    <div class="min-w-[850px] mx-auto flex flex-col items-center">
                         
                         <!-- Level 1: Wali Kelas -->
                         <div class="flex flex-col items-center">
-                            <div class="w-72 bg-gradient-to-tr from-blue-700 to-cyan-600 text-white rounded-2xl p-5 text-center shadow-xl border border-blue-400 relative">
+                            <div class="w-80 bg-gradient-to-tr from-blue-700 to-cyan-600 text-white rounded-3xl p-6 text-center shadow-xl border border-blue-400 relative">
                                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-white text-blue-700 text-xs font-extrabold rounded-full shadow">WALI KELAS</span>
-                                <img id="baganWaliFoto" src="https://placehold.co/90x90/ffffff/2563eb?text=Wali" alt="Wali Kelas" class="w-16 h-16 rounded-xl mx-auto object-cover shadow mb-3 border-2 border-white" onerror="this.src='https://placehold.co/90x90/ffffff/2563eb?text=Wali'">
-                                <h3 class="text-base font-bold" id="baganWaliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
-                                <p class="text-[11px] text-blue-100 mt-0.5">Pembina & Pengarah Kelas</p>
+                                <img id="baganWaliFoto" src="https://placehold.co/140x140/ffffff/2563eb?text=Wali" alt="Wali Kelas" class="w-24 h-24 rounded-2xl mx-auto object-cover shadow mb-3 border-2 border-white" onerror="this.src='https://placehold.co/140x140/ffffff/2563eb?text=Wali'">
+                                <h3 class="text-lg font-bold" id="baganWaliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
+                                <p class="text-xs text-blue-100 mt-1">Pembina & Pengarah Kelas</p>
                             </div>
-                            <!-- Vertical Line Down -->
                             <div class="w-0.5 h-8 bg-blue-300"></div>
                         </div>
 
                         <!-- Connector Horizontal for Level 2 (Ketua & Wakil) -->
-                        <div class="relative w-[500px] h-0.5 bg-blue-300">
-                            <!-- Dropdown vertical line to Ketua -->
+                        <div class="relative w-[540px] h-0.5 bg-blue-300">
                             <div class="absolute left-0 top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <!-- Dropdown vertical line to Wakil -->
                             <div class="absolute right-0 top-0 w-0.5 h-6 bg-blue-300"></div>
                         </div>
 
                         <!-- Level 2: Ketua & Wakil Ketua Kelas -->
-                        <div class="w-full max-w-[600px] flex justify-between pt-6 gap-8">
+                        <div class="w-full max-w-[640px] flex justify-between pt-6 gap-8">
                             <!-- Ketua Kelas -->
-                            <div class="w-64 bg-white rounded-2xl p-4 text-center shadow-md border-2 border-blue-600 relative">
+                            <div class="w-72 bg-white rounded-3xl p-5 text-center shadow-md border-2 border-blue-600 relative">
                                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-xs font-extrabold rounded-full shadow">KETUA KELAS</span>
-                                <img id="baganKetuaFoto" src="https://placehold.co/80x80/2563eb/ffffff?text=Ketua" class="w-14 h-14 rounded-xl mx-auto object-cover shadow mb-2 border border-blue-100" onerror="this.src='https://placehold.co/80x80/2563eb/ffffff?text=Ketua'">
-                                <h4 class="font-bold text-slate-900 text-sm" id="baganKetuaNama">Muhammad Farhan</h4>
-                                <p class="text-[11px] text-slate-500 mt-0.5" id="baganKetuaDesc">Pemimpin Umum Kelas</p>
+                                <img id="baganKetuaFoto" src="https://placehold.co/120x120/2563eb/ffffff?text=Ketua" class="w-20 h-20 rounded-2xl mx-auto object-cover shadow mb-3 border border-blue-100" onerror="this.src='https://placehold.co/120x120/2563eb/ffffff?text=Ketua'">
+                                <h4 class="font-bold text-slate-900 text-base" id="baganKetuaNama">Muhammad Farhan</h4>
+                                <p class="text-xs text-slate-500 mt-1" id="baganKetuaDesc">Pemimpin Umum Kelas</p>
                             </div>
 
                             <!-- Wakil Ketua -->
-                            <div class="w-64 bg-white rounded-2xl p-4 text-center shadow-md border-2 border-blue-500 relative">
+                            <div class="w-72 bg-white rounded-3xl p-5 text-center shadow-md border-2 border-blue-500 relative">
                                 <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-500 text-white text-xs font-extrabold rounded-full shadow">WAKIL KETUA</span>
-                                <img id="baganWakilFoto" src="https://placehold.co/80x80/3b82f6/ffffff?text=Wakil" class="w-14 h-14 rounded-xl mx-auto object-cover shadow mb-2 border border-blue-100" onerror="this.src='https://placehold.co/80x80/3b82f6/ffffff?text=Wakil'">
-                                <h4 class="font-bold text-slate-900 text-sm" id="baganWakilNama">Siti Rahmawati</h4>
-                                <p class="text-[11px] text-slate-500 mt-0.5" id="baganWakilDesc">Koordinator Internal & Acara</p>
+                                <img id="baganWakilFoto" src="https://placehold.co/120x120/3b82f6/ffffff?text=Wakil" class="w-20 h-20 rounded-2xl mx-auto object-cover shadow mb-3 border border-blue-100" onerror="this.src='https://placehold.co/120x120/3b82f6/ffffff?text=Wakil'">
+                                <h4 class="font-bold text-slate-900 text-base" id="baganWakilNama">Siti Rahmawati</h4>
+                                <p class="text-xs text-slate-500 mt-1" id="baganWakilDesc">Koordinator Internal & Acara</p>
                             </div>
                         </div>
 
                         <!-- Vertical Line Down from Level 2 -->
-                        <div class="flex justify-between w-[500px]">
-                            <div class="w-0.5 h-6 bg-blue-300 ml-32"></div>
-                            <div class="w-0.5 h-6 bg-blue-300 mr-32"></div>
+                        <div class="flex justify-between w-[540px]">
+                            <div class="w-0.5 h-6 bg-blue-300 ml-36"></div>
+                            <div class="w-0.5 h-6 bg-blue-300 mr-36"></div>
                         </div>
 
-                        <!-- Connector Horizontal for Level 3 (Sekretaris & Bendahara) -->
-                        <div class="relative w-[680px] h-0.5 bg-blue-300">
-                            <!-- Dropdown vertical lines to 4 boxes -->
-                            <div class="absolute left-1 top-0 w-0.5 h-6 bg-blue-300"></div>
+                        <!-- Connector Horizontal for Level 3 -->
+                        <div class="relative w-[740px] h-0.5 bg-blue-300">
+                            <div class="absolute left-2 top-0 w-0.5 h-6 bg-blue-300"></div>
                             <div class="absolute left-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
                             <div class="absolute right-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <div class="absolute right-1 top-0 w-0.5 h-6 bg-blue-300"></div>
+                            <div class="absolute right-2 top-0 w-0.5 h-6 bg-blue-300"></div>
                         </div>
 
-                        <!-- Level 3: Sekretaris 1, Sekretaris 2, Bendahara 1, Bendahara 2 -->
-                        <div class="w-full max-w-[760px] flex justify-between pt-6 gap-3">
-                            <!-- Sekretaris 1 -->
-                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 1</span>
-                                <img id="baganSek1Foto" src="https://placehold.co/60x60/2563eb/ffffff?text=Sek1" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/2563eb/ffffff?text=Sek1'">
+                        <!-- Level 3: Sekretaris & Bendahara -->
+                        <div class="w-full max-w-[820px] flex justify-between pt-6 gap-4">
+                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 1</span>
+                                <img id="baganSek1Foto" src="https://placehold.co/100x100/2563eb/ffffff?text=Sek1" class="w-16 h-16 rounded-2xl mx-auto object-cover shadow mb-2" onerror="this.src='https://placehold.co/100x100/2563eb/ffffff?text=Sek1'">
                                 <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek1Nama">Dewi Lestari</h5>
-                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganSek1Desc">Administrasi</p>
+                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganSek1Desc">Administrasi</p>
                             </div>
-                            <!-- Sekretaris 2 -->
-                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 2</span>
-                                <img id="baganSek2Foto" src="https://placehold.co/60x60/3b82f6/ffffff?text=Sek2" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/3b82f6/ffffff?text=Sek2'">
+                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 2</span>
+                                <img id="baganSek2Foto" src="https://placehold.co/100x100/3b82f6/ffffff?text=Sek2" class="w-16 h-16 rounded-2xl mx-auto object-cover shadow mb-2" onerror="this.src='https://placehold.co/100x100/3b82f6/ffffff?text=Sek2'">
                                 <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek2Nama">-</h5>
-                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganSek2Desc">Surat-menyurat</p>
+                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganSek2Desc">Surat-menyurat</p>
                             </div>
-                            <!-- Bendahara 1 -->
-                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-cyan-600 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 1</span>
-                                <img id="baganBen1Foto" src="https://placehold.co/60x60/0891b2/ffffff?text=Ben1" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/0891b2/ffffff?text=Ben1'">
+                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-cyan-600 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 1</span>
+                                <img id="baganBen1Foto" src="https://placehold.co/100x100/0891b2/ffffff?text=Ben1" class="w-16 h-16 rounded-2xl mx-auto object-cover shadow mb-2" onerror="this.src='https://placehold.co/100x100/0891b2/ffffff?text=Ben1'">
                                 <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen1Nama">Rizky Pratama</h5>
-                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganBen1Desc">Keuangan Utama</p>
+                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganBen1Desc">Keuangan Utama</p>
                             </div>
-                            <!-- Bendahara 2 -->
-                            <div class="w-40 bg-white rounded-2xl p-3 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 2</span>
-                                <img id="baganBen2Foto" src="https://placehold.co/60x60/06b6d4/ffffff?text=Ben2" class="w-12 h-12 rounded-xl mx-auto object-cover shadow mb-1.5" onerror="this.src='https://placehold.co/60x60/06b6d4/ffffff?text=Ben2'">
+                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
+                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 2</span>
+                                <img id="baganBen2Foto" src="https://placehold.co/100x100/06b6d4/ffffff?text=Ben2" class="w-16 h-16 rounded-2xl mx-auto object-cover shadow mb-2" onerror="this.src='https://placehold.co/100x100/06b6d4/ffffff?text=Ben2'">
                                 <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen2Nama">-</h5>
-                                <p class="text-[10px] text-slate-500 truncate mt-0.5" id="baganBen2Desc">Pencatatan Kas</p>
+                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganBen2Desc">Pencatatan Kas</p>
                             </div>
                         </div>
 
@@ -213,10 +205,9 @@
             </div>
         </section>
 
-        <!-- Daftar Siswa Section -->
         <section id="siswa" class="py-20 bg-slate-50 border-t border-slate-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
                     <div>
                         <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Anggota Kelas</span>
                         <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Daftar Siswa & Siswi</h2>
@@ -230,11 +221,10 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="siswaContainer"></div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="siswaContainer"></div>
             </div>
         </section>
 
-        <!-- Jadwal Piket Section -->
         <section id="piket" class="py-20 bg-white border-t border-slate-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-2xl mx-auto mb-12">
@@ -256,54 +246,76 @@
             </div>
         </section>
 
-        <!-- Dinding Pesan Section -->
-        <section id="pesan" class="py-20 bg-slate-50 border-t border-slate-100">
-            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Kirim Aspirasi & Salam</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Kirim Pesan Rahasia</h2>
-                    <p class="text-slate-600 mt-2 text-sm">Kirimkan kesan, pesan semangat, atau salam. Pesan Anda bersifat privat dan hanya akan diterima oleh pengurus kelas.</p>
+        <section id="kenangan" class="py-20 bg-slate-50 border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                    <div>
+                        <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Dokumentasi & Momen Indah</span>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Galeri Foto & Video Kelas</h2>
+                        <p class="text-slate-600 mt-1">Kumpulan momen foto dan video kegiatan kelas.</p>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
-                    <form id="messageForm" onsubmit="handlePostMessage(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Nama Pengirim</label>
-                            <input type="text" id="msgName" required value="Geril Suardi" placeholder="Contoh: Geril Suardi" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Penerima / Target</label>
-                            <input type="text" id="msgTarget" required placeholder="Contoh: Wali Kelas / Seluruh Pengurus" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Isi Pesan</label>
-                            <textarea id="msgContent" required rows="4" placeholder="Tulis pesan rahasia di sini..." class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
-                        </button>
-                    </form>
+                <!-- Bagian Video Utama / Sorotan -->
+                <div class="mb-16">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-video text-blue-600"></i> Video Dokumentasi Kelas
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="videosContainer"></div>
                 </div>
+
+                <!-- Bagian Galeri Foto -->
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-images text-blue-600"></i> Galeri Foto Kegiatan
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="memoriesContainer"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pesan" class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Ruang Interaksi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Dinding Pesan Kelas</h2>
+                    <p class="text-slate-600 mt-1 text-sm">Kirim pesan, dukungan, atau kesan untuk kelas atau pengurus.</p>
+                </div>
+                
+                <form onsubmit="handlePostMessage(event)" class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Nama Pengirim</label>
+                        <input type="text" id="msgName" required placeholder="Nama Anda / Pengunjung" class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Ditujukan Kepada</label>
+                        <input type="text" id="msgTarget" required placeholder="Contoh: Seluruh Warga Kelas / Wali Kelas" class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Pesan / Kesan</label>
+                        <textarea id="msgContent" required rows="3" placeholder="Tuliskan pesan Anda di sini..." class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Pesan ke Dinding
+                    </button>
+                </form>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+    <footer class="bg-slate-950 text-white py-12 border-t border-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
             <div>
-                <div class="flex items-center justify-center sm:justify-start gap-3 mb-2">
-                    <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <span class="font-bold text-lg" id="footerClassName">XII IPA 1 Portal</span>
-                </div>
-                <p class="text-sm text-slate-400">Website kelas publik resmi angkatan.</p>
+                <h3 class="text-lg font-bold" id="footerClassName">XII IPA 1 Portal</h3>
+                <p class="text-xs text-slate-400 mt-1">Website resmi kelas interaktif.</p>
             </div>
-            <p class="text-xs text-slate-500">© 2026 Portal Kelas Kita. All rights reserved.</p>
+            <div class="flex items-center gap-4 text-sm text-slate-400">
+                <span>&copy; 2026 Seluruh Hak Cipta Dilindungi</span>
+            </div>
         </div>
     </footer>
 
-    <!-- Notification Toast -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold border border-slate-700">
         <i class="fa-solid fa-circle-check text-blue-400"></i>
         <span id="toastMsg">Berhasil!</span>
@@ -313,27 +325,28 @@
         const defaultData = {
             className: "XII IPA 1",
             heroBadge: "Angkatan Aktif • Solid & Berprestasi",
-            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            logo: "",
             wali: {
                 nama: "Drs. H. Ahmad Fauzi, M.Pd.",
                 quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten.",
-                foto: "https://placehold.co/160x160/2563eb/ffffff?text=Wali+Kelas"
+                foto: "https://placehold.co/200x200/2563eb/ffffff?text=Wali+Kelas"
             },
             struktur: {
-                ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "https://placehold.co/90x90/2563eb/ffffff?text=Ketua" },
-                wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "https://placehold.co/90x90/0891b2/ffffff?text=Wakil" },
-                sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "https://placehold.co/80x80/2563eb/ffffff?text=Sek1" },
-                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "https://placehold.co/80x80/3b82f6/ffffff?text=Sek2" },
-                ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "https://placehold.co/80x80/0891b2/ffffff?text=Ben1" },
-                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "https://placehold.co/80x80/06b6d4/ffffff?text=Ben2" }
+                ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "https://placehold.co/120x120/2563eb/ffffff?text=Ketua" },
+                wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "https://placehold.co/120x120/0891b2/ffffff?text=Wakil" },
+                sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Sek1" },
+                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Sek2" },
+                ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "https://placehold.co/100x100/0891b2/ffffff?text=Ben1" },
+                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "https://placehold.co/100x100/06b6d4/ffffff?text=Ben2" }
             },
             siswa: [
-                { absen: 1, nama: "Ahmad Zaki", gender: "L", hobi: "Sepak Bola", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Zaki" },
-                { absen: 2, nama: "Alya Nabila", gender: "P", hobi: "Membaca Novel", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Alya" },
-                { absen: 3, nama: "Andika Pratama", gender: "L", hobi: "Gaming & Coding", foto: "https://placehold.co/100x100/0891b2/ffffff?text=Andika" },
-                { absen: 4, nama: "Anisa Fitri", gender: "P", hobi: "Menyanyi", foto: "https://placehold.co/100x100/06b6d4/ffffff?text=Anisa" },
-                { absen: 5, nama: "Dimas Anggara", gender: "L", hobi: "Basket", foto: "https://placehold.co/100x100/2563eb/ffffff?text=Dimas" },
-                { absen: 6, nama: "Fauziah Zahra", gender: "P", hobi: "Seni Lukis", foto: "https://placehold.co/100x100/3b82f6/ffffff?text=Zahra" }
+                { absen: 1, nama: "Ahmad Zaki", gender: "L", hobi: "Sepak Bola", foto: "https://placehold.co/160x160/2563eb/ffffff?text=Zaki" },
+                { absen: 2, nama: "Alya Nabila", gender: "P", hobi: "Membaca Novel", foto: "https://placehold.co/160x160/3b82f6/ffffff?text=Alya" },
+                { absen: 3, nama: "Andika Pratama", gender: "L", hobi: "Gaming & Coding", foto: "https://placehold.co/160x160/0891b2/ffffff?text=Andika" },
+                { absen: 4, nama: "Anisa Fitri", gender: "P", hobi: "Menyanyi", foto: "https://placehold.co/160x160/06b6d4/ffffff?text=Anisa" },
+                { absen: 5, nama: "Dimas Anggara", gender: "L", hobi: "Basket", foto: "https://placehold.co/160x160/2563eb/ffffff?text=Dimas" },
+                { absen: 6, nama: "Fauziah Zahra", gender: "P", hobi: "Seni Lukis", foto: "https://placehold.co/160x160/3b82f6/ffffff?text=Zahra" }
             ],
             piket: {
                 "Senin": ["Ahmad Zaki", "Alya Nabila", "Andika Pratama"],
@@ -342,6 +355,14 @@
                 "Kamis": ["Nadia Safitri", "Reza Pahlevi", "Salsabila Putri"],
                 "Jumat": ["Seluruh Anggota Kelas (Piket Bersama)"]
             },
+            memories: [
+                { id: 1, title: "Keseruan Perayaan HUT RI", date: "17 Agustus 2025", foto: "https://placehold.co/600x400/2563eb/ffffff?text=Lomba+17+Agustus" },
+                { id: 2, title: "Studi Wisata Laboratorium Sains", date: "10 Januari 2026", foto: "https://placehold.co/600x400/0891b2/ffffff?text=Studi+Wisata" },
+                { id: 3, title: "Malam Keakraban Kelas", date: "28 Februari 2026", foto: "https://placehold.co/600x400/3b82f6/ffffff?text=Makrab+Kelas" }
+            ],
+            videos: [
+                { id: 1, title: "Teaser Profil Kelas XII IPA 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+            ],
             messages: []
         };
 
@@ -350,6 +371,11 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             renderAll();
+            const orgChartScroll = document.querySelector('#struktur .overflow-x-auto');
+            if (orgChartScroll) {
+                orgChartScroll.scrollLeft = (orgChartScroll.scrollWidth - orgChartScroll.clientWidth) / 2;
+            }
+
             window.addEventListener('focus', () => {
                 renderAll();
             });
@@ -380,7 +406,6 @@
             document.getElementById('waliQuote').innerText = `"${appData.wali.quote}"`;
             document.getElementById('waliFoto').src = appData.wali.foto;
 
-            // Render Bagan Struktur
             document.getElementById('baganWaliNama').innerText = appData.wali.nama;
             document.getElementById('baganWaliFoto').src = appData.wali.foto;
 
@@ -421,6 +446,8 @@
             renderSiswa(appData.siswa);
             renderPiketTabs();
             selectPiketDay(currentDay);
+            renderMemories();
+            renderVideos();
         }
 
         function renderSiswa(list) {
@@ -430,15 +457,15 @@
                 return;
             }
             container.innerHTML = list.map(s => `
-                <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-100 flex flex-col items-center text-center gap-3 hover:shadow-md transition">
-                    <img src="${s.foto || 'https://placehold.co/100x100/2563eb/ffffff?text=Siswa'}" alt="${s.nama}" class="w-20 h-20 rounded-2xl object-cover shadow-sm border border-slate-100" onerror="this.src='https://placehold.co/100x100/2563eb/ffffff?text=Siswa'">
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col items-center text-center gap-2.5 hover:shadow-md transition">
+                    <img src="${s.foto || 'https://placehold.co/120x120/2563eb/ffffff?text=Siswa'}" alt="${s.nama}" class="w-20 h-20 rounded-xl object-cover shadow-sm border border-slate-100" onerror="this.src='https://placehold.co/120x120/2563eb/ffffff?text=Siswa'">
                     <div class="w-full overflow-hidden">
-                        <div class="inline-block px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-600 text-xs font-extrabold mb-1">Absen ${s.absen}</div>
-                        <h4 class="font-bold text-slate-900 truncate text-base">${s.nama}</h4>
-                        <div class="flex items-center justify-center gap-2 mt-1">
-                            <span class="text-xs px-2 py-0.5 rounded font-semibold ${s.gender === 'L' ? 'bg-blue-50 text-blue-600' : 'bg-pink-50 text-pink-600'}">${s.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
+                        <div class="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-600 text-[10px] font-extrabold mb-1">Absen ${s.absen}</div>
+                        <h4 class="font-bold text-slate-900 truncate text-sm" title="${s.nama}">${s.nama}</h4>
+                        <div class="flex items-center justify-center gap-1 mt-1">
+                            <span class="text-[10px] px-2 py-0.5 rounded font-semibold ${s.gender === 'L' ? 'bg-blue-50 text-blue-600' : 'bg-pink-50 text-pink-600'}">${s.gender === 'L' ? 'L' : 'P'}</span>
                         </div>
-                        <p class="text-xs text-slate-400 truncate mt-1">Hobi: ${s.hobi || '-'}</p>
+                        <p class="text-[11px] text-slate-400 truncate mt-1">Hobi: ${s.hobi || '-'}</p>
                     </div>
                 </div>
             `).join('');
@@ -474,6 +501,53 @@
                     <span>${m}</span>
                 </li>
             `).join('');
+        }
+
+        function renderMemories() {
+            const container = document.getElementById('memoriesContainer');
+            const memories = appData.memories || [];
+            if (memories.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">Belum ada galeri foto yang diunggah.</div>`;
+                return;
+            }
+            container.innerHTML = memories.map(m => `
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col group hover:shadow-xl transition">
+                    <div class="h-48 overflow-hidden relative bg-slate-100">
+                        <img src="${m.foto}" alt="${m.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/2563eb/ffffff?text=Kenangan'">
+                        <span class="absolute top-3 right-3 px-3 py-1 bg-slate-900/70 backdrop-blur-md text-white text-xs font-bold rounded-full">${m.date}</span>
+                    </div>
+                    <div class="p-5 flex flex-col justify-between flex-grow">
+                        <h4 class="font-bold text-slate-900 text-base mb-2">${m.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderVideos() {
+            const container = document.getElementById('videosContainer');
+            const videos = appData.videos || [];
+            if (videos.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400 font-medium">Belum ada video dokumentasi yang ditambahkan.</div>`;
+                return;
+            }
+            container.innerHTML = videos.map(v => {
+                let embedUrl = v.url;
+                if (embedUrl.includes('watch?v=')) {
+                    embedUrl = embedUrl.replace('watch?v=', 'embed/');
+                } else if (embedUrl.includes('youtu.be/')) {
+                    embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+                }
+                return `
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 flex flex-col">
+                        <div class="relative w-full aspect-video bg-slate-900">
+                            <iframe src="${embedUrl}" title="${v.title}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="font-bold text-slate-900 text-base">${v.title}</h4>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function handlePostMessage(event) {
