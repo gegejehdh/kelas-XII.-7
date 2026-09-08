@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
@@ -321,12 +322,16 @@
         <span id="toastMsg">Berhasil!</span>
     </div>
 
+    <!-- ADMIN LOGIN MODAL / PANEL EMBEDDED TOGGLE (Bisa disatukan atau terpisah file admin.html) -->
+    <!-- Jika ingin menggunakan panel admin terpisah seperti file admin.html di bawah: -->
+
     <script>
         const defaultData = {
             className: "XII IPA 1",
             heroBadge: "Angkatan Aktif • Solid & Berprestasi",
             tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
-            logo: "",
+            logoImg: "", // Base64 atau URL gambar logo kelas
+            bannerFoto: "https://placehold.co/1200x600/1e293b/38bdf8?text=Banner+Utama+Kelas",
             wali: {
                 nama: "Drs. H. Ahmad Fauzi, M.Pd.",
                 quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten.",
@@ -401,6 +406,16 @@
             document.getElementById('heroClassName').innerText = appData.className;
             document.getElementById('heroTagline').innerText = appData.tagline;
             document.getElementById('footerClassName').innerText = `${appData.className} Portal`;
+
+            // Render Logo Kelas di Navbar (ikon atau gambar unggahan admin)
+            const logoContainer = document.getElementById('navLogoContainer');
+            if (appData.logoImg && appData.logoImg.trim() !== "") {
+                logoContainer.innerHTML = `<img src="${appData.logoImg}" alt="Logo Kelas" class="w-full h-full object-cover">`;
+                logoContainer.className = "w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0 border border-slate-200";
+            } else {
+                logoContainer.innerHTML = `<i class="fa-solid fa-graduation-cap text-xl" id="navLogoIcon"></i>`;
+                logoContainer.className = "w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0";
+            }
 
             document.getElementById('waliNama').innerText = appData.wali.nama;
             document.getElementById('waliQuote').innerText = `"${appData.wali.quote}"`;
@@ -597,3 +612,4 @@
     </script>
 </body>
 </html>
+```
