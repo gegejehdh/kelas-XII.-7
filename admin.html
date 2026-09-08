@@ -64,7 +64,7 @@
                         <i class="fa-solid fa-circle-dot animate-pulse"></i> Sesi Pemegang Tunggal Aktif
                     </div>
                     <h1 class="text-3xl font-extrabold tracking-tight text-white">Panel Kontrol Khusus Pengurus</h1>
-                    <p class="text-blue-200 text-sm mt-1">Kelola galeri foto, video dokumentasi, siswa, piket, & seluruh informasi kelas.</p>
+                    <p class="text-blue-200 text-sm mt-1">Kelola galeri foto, video dokumentasi, logo kelas, siswa, piket, & seluruh informasi kelas.</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <a href="index.html" target="_blank" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg transition flex items-center gap-2">
@@ -113,7 +113,6 @@
 
             <!-- TAB 2: KELOLA FOTO & VIDEO -->
             <div id="tabMedia" class="hidden space-y-6">
-                <!-- Subtab Foto Kenangan -->
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <div class="flex items-center justify-between">
                         <div>
@@ -127,7 +126,6 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="adminMemoriesContainer"></div>
                 </div>
 
-                <!-- Subtab Video Dokumentasi -->
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <div class="flex items-center justify-between">
                         <div>
@@ -146,8 +144,30 @@
             <div id="tabSettings" class="hidden space-y-6">
                 <div class="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 space-y-6">
                     <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-pen-to-square text-blue-400"></i> Ubah Identitas, Informasi & Foto Profil Website
+                        <i class="fa-solid fa-pen-to-square text-blue-400"></i> Ubah Identitas, Informasi & Logo Website
                     </h3>
+
+                    <!-- Pengaturan Logo Kelas di sebelah kata Portal -->
+                    <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+                        <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider">Logo Kelas (Di Samping Teks "Portal")</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Unggah Gambar Logo Kelas</label>
+                                <input type="file" id="inputLogoFile" accept="image/*" onchange="previewAndConvertImage(event, 'inputLogoImgVal')" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+                                <input type="hidden" id="inputLogoImgVal">
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Pratinjau Logo</label>
+                                    <div class="w-16 h-16 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 flex items-center justify-center">
+                                        <img id="previewLogoImg" src="" class="w-full h-full object-cover hidden">
+                                        <i id="previewLogoIcon" class="fa-solid fa-graduation-cap text-xl text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="clearLogo()" class="px-3 py-2 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-xl hover:bg-rose-500/30 mt-5">Hapus / Reset Logo</button>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Pengaturan Profil/Hero Banner Utama -->
                     <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
@@ -451,6 +471,7 @@
             className: "XII IPA 1",
             heroBadge: "Angkatan Aktif • Solid & Berprestasi",
             tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
+            logoImg: "",
             bannerFoto: "https://placehold.co/1200x600/1e293b/38bdf8?text=Banner+Utama+Kelas",
             wali: {
                 nama: "Drs. H. Ahmad Fauzi, M.Pd.",
@@ -495,7 +516,6 @@
 
         let appData = JSON.parse(localStorage.getItem('classPortalData')) || defaultData;
         const SECRET_ADMIN_PASSWORD = "adminrahasia123";
-        let isEditingStudent = false;
 
         window.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('exclusiveAdminSession') === 'true') {
@@ -594,10 +614,27 @@
                 document.getElementById(targetHiddenId).value = e.target.result;
                 if (targetHiddenId === 'inputBannerFoto') {
                     document.getElementById('previewBannerImg').src = e.target.result;
+                } else if (targetHiddenId === 'inputLogoImgVal') {
+                    const prevLogoImg = document.getElementById('previewLogoImg');
+                    const prevLogoIcon = document.getElementById('previewLogoIcon');
+                    prevLogoImg.src = e.target.result;
+                    prevLogoImg.classList.remove('hidden');
+                    prevLogoIcon.classList.add('hidden');
                 }
                 showToast("File foto berhasil dimuat!");
             };
             reader.readAsDataURL(file);
+        }
+
+        function clearLogo() {
+            document.getElementById('inputLogoImgVal').value = "";
+            document.getElementById('inputLogoFile').value = "";
+            const prevLogoImg = document.getElementById('previewLogoImg');
+            const prevLogoIcon = document.getElementById('previewLogoIcon');
+            prevLogoImg.src = "";
+            prevLogoImg.classList.add('hidden');
+            prevLogoIcon.classList.remove('hidden');
+            showToast("Logo dikosongkan (kembali ke ikon default).");
         }
 
         function previewAndConvertVideo(event, targetInputId) {
@@ -618,6 +655,20 @@
             document.getElementById('inputHeroBadge').value = appData.heroBadge;
             document.getElementById('inputTagline').value = appData.tagline;
             
+            const logoVal = appData.logoImg || "";
+            document.getElementById('inputLogoImgVal').value = logoVal;
+            const prevLogoImg = document.getElementById('previewLogoImg');
+            const prevLogoIcon = document.getElementById('previewLogoIcon');
+            if (logoVal) {
+                prevLogoImg.src = logoVal;
+                prevLogoImg.classList.remove('hidden');
+                prevLogoIcon.classList.add('hidden');
+            } else {
+                prevLogoImg.src = "";
+                prevLogoImg.classList.add('hidden');
+                prevLogoIcon.classList.remove('hidden');
+            }
+
             const bannerFotoVal = appData.bannerFoto || defaultData.bannerFoto;
             document.getElementById('inputBannerFoto').value = bannerFotoVal;
             document.getElementById('previewBannerImg').src = bannerFotoVal;
@@ -662,6 +713,7 @@
             appData.className = document.getElementById('inputClassName').value || "XII IPA 1";
             appData.heroBadge = document.getElementById('inputHeroBadge').value || "";
             appData.tagline = document.getElementById('inputTagline').value || "";
+            appData.logoImg = document.getElementById('inputLogoImgVal').value || "";
             
             const bannerFotoVal = document.getElementById('inputBannerFoto').value;
             if (bannerFotoVal) appData.bannerFoto = bannerFotoVal;
@@ -717,7 +769,7 @@
             };
 
             localStorage.setItem('classPortalData', JSON.stringify(appData));
-            showToast("Informasi & foto profil website berhasil diperbarui!");
+            showToast("Identitas, Logo & informasi website berhasil diperbarui!");
         }
 
         function resetDefaultData() {
@@ -787,7 +839,6 @@
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
             
-            // Render memories (Photos)
             const memContainer = document.getElementById('adminMemoriesContainer');
             const memories = appData.memories || [];
             if (memories.length === 0) {
@@ -810,7 +861,6 @@
                 `).join('');
             }
 
-            // Render Videos
             const vidContainer = document.getElementById('adminVideosContainer');
             const videos = appData.videos || [];
             if (videos.length === 0) {
@@ -892,7 +942,6 @@
             }
 
             const isFile = url.startsWith('data:video');
-
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
             if (!appData.videos) appData.videos = [];
@@ -923,26 +972,20 @@
             const tbody = document.getElementById('adminStudentsTableBody');
 
             if (siswaList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-8 text-slate-500">Belum ada data siswa.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-500">Belum ada data siswa.</td></tr>`;
                 return;
             }
 
-            tbody.innerHTML = siswaList.map((s, idx) => `
-                <tr class="hover:bg-slate-950/50 transition">
-                    <td class="py-3 px-4 font-bold text-blue-400">${s.absen}</td>
-                    <td class="py-3 px-4">
-                        <img src="${s.foto || 'https://placehold.co/50x50/2563eb/ffffff?text=Siswa'}" class="w-10 h-10 rounded-xl object-cover border border-slate-800">
-                    </td>
+            tbody.innerHTML = siswaList.map(s => `
+                <tr class="hover:bg-slate-900/50 transition">
+                    <td class="py-3 px-4 font-bold text-blue-400">#${s.absen}</td>
+                    <td class="py-3 px-4"><img src="${s.foto}" class="w-10 h-10 rounded-xl object-cover"></td>
                     <td class="py-3 px-4 font-semibold text-white">${s.nama}</td>
-                    <td class="py-3 px-4">
-                        <span class="px-2 py-0.5 rounded text-xs font-bold ${s.gender === 'L' ? 'bg-blue-500/20 text-blue-400' : 'bg-pink-500/20 text-pink-400'}">${s.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
-                    </td>
-                    <td class="py-3 px-4 text-slate-400">${s.hobi || '-'}</td>
-                    <td class="py-3 px-4 text-center">
-                        <div class="flex items-center justify-center gap-2">
-                            <button onclick="openEditStudentModal(${idx})" class="px-3 py-1.5 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg text-xs font-bold transition">Edit</button>
-                            <button onclick="deleteStudent(${idx})" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-lg text-xs font-bold transition">Hapus</button>
-                        </div>
+                    <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-xs font-bold ${s.gender === 'L' ? 'bg-blue-500/20 text-blue-400' : 'bg-pink-500/20 text-pink-400'}">${s.gender}</span></td>
+                    <td class="py-3 px-4 text-slate-400 text-xs">${s.hobi || '-'}</td>
+                    <td class="py-3 px-4 text-center space-x-2">
+                        <button onclick="openEditStudentModal(${s.absen})" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 text-xs font-bold rounded-lg hover:bg-amber-500/30">Edit</button>
+                        <button onclick="deleteStudent(${s.absen})" class="px-2.5 py-1 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-lg hover:bg-rose-500/30">Hapus</button>
                     </td>
                 </tr>
             `).join('');
@@ -951,22 +994,29 @@
         function openAddStudentModal() {
             isEditingStudent = false;
             document.getElementById('modalStudentTitle').innerText = "Tambah Siswa Baru";
-            document.getElementById('studentForm').reset();
-            document.getElementById('editStudentOriginalAbsen').value = "";
+            document.getElementById('inputSiswaAbsen').value = "";
+            document.getElementById('inputSiswaNama').value = "";
+            document.getElementById('inputSiswaHobi').value = "";
+            document.getElementById('inputSiswaGender').value = "L";
             document.getElementById('inputSiswaFoto').value = "";
+            document.getElementById('inputSiswaFile').value = "";
             document.getElementById('studentModal').classList.remove('hidden');
         }
 
-        function openEditStudentModal(index) {
+        function openEditStudentModal(absen) {
             isEditingStudent = true;
-            document.getElementById('modalStudentTitle').innerText = "Edit Anggota Siswa";
-            const s = appData.siswa[index];
-            document.getElementById('editStudentOriginalAbsen').value = index;
-            document.getElementById('inputSiswaAbsen').value = s.absen;
-            document.getElementById('inputSiswaGender').value = s.gender;
-            document.getElementById('inputSiswaNama').value = s.nama;
-            document.getElementById('inputSiswaHobi').value = s.hobi || "";
-            document.getElementById('inputSiswaFoto').value = s.foto || "";
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
+            const student = (appData.siswa || []).find(s => s.absen === absen);
+            if (!student) return;
+
+            document.getElementById('modalStudentTitle').innerText = "Edit Data Siswa";
+            document.getElementById('editStudentOriginalAbsen').value = student.absen;
+            document.getElementById('inputSiswaAbsen').value = student.absen;
+            document.getElementById('inputSiswaNama').value = student.nama;
+            document.getElementById('inputSiswaHobi').value = student.hobi || "";
+            document.getElementById('inputSiswaGender').value = student.gender || "L";
+            document.getElementById('inputSiswaFoto').value = student.foto || "";
             document.getElementById('studentModal').classList.remove('hidden');
         }
 
@@ -974,39 +1024,49 @@
 
         function handleSaveStudent(e) {
             e.preventDefault();
+            const absen = parseInt(document.getElementById('inputSiswaAbsen').value);
+            const nama = document.getElementById('inputSiswaNama').value.trim();
+            const hobi = document.getElementById('inputSiswaHobi').value.trim();
+            const gender = document.getElementById('inputSiswaGender').value;
+            let foto = document.getElementById('inputSiswaFoto').value;
+
+            if (!absen || !nama) return;
+
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
             if (!appData.siswa) appData.siswa = [];
 
-            const absen = parseInt(document.getElementById('inputSiswaAbsen').value);
-            const gender = document.getElementById('inputSiswaGender').value;
-            const nama = document.getElementById('inputSiswaNama').value.trim();
-            const hobi = document.getElementById('inputSiswaHobi').value.trim();
-            const foto = document.getElementById('inputSiswaFoto').value || (isEditingStudent ? appData.siswa[document.getElementById('editStudentOriginalAbsen').value].foto : `https://placehold.co/100x100/2563eb/ffffff?text=${encodeURIComponent(nama.charAt(0))}`);
-
-            if (isEditingStudent) {
-                const idx = parseInt(document.getElementById('editStudentOriginalAbsen').value);
-                appData.siswa[idx] = { absen, gender, nama, hobi, foto };
-                showToast("Data siswa diperbarui!");
-            } else {
-                appData.siswa.push({ absen, gender, nama, hobi, foto });
-                appData.siswa.sort((a, b) => a.absen - b.absen);
-                showToast("Siswa baru ditambahkan!");
+            if (!foto) {
+                foto = `https://placehold.co/120x120/2563eb/ffffff?text=${encodeURIComponent(nama.split(' ')[0])}`;
             }
 
+            if (isEditingStudent) {
+                const originalAbsen = parseInt(document.getElementById('editStudentOriginalAbsen').value);
+                appData.siswa = appData.siswa.map(s => {
+                    if (s.absen === originalAbsen) {
+                        return { absen, nama, hobi, gender, foto: foto || s.foto };
+                    }
+                    return s;
+                });
+            } else {
+                appData.siswa.push({ absen, nama, hobi, gender, foto });
+            }
+
+            appData.siswa.sort((a, b) => a.absen - b.absen);
             localStorage.setItem('classPortalData', JSON.stringify(appData));
             closeStudentModal();
             renderAdminStudents();
+            showToast("Data siswa berhasil disimpan!");
         }
 
-        function deleteStudent(index) {
-            if (confirm("Hapus siswa ini?")) {
+        function deleteStudent(absen) {
+            if (confirm(`Hapus siswa nomor absen ${absen}?`)) {
                 const raw = localStorage.getItem('classPortalData');
                 if (raw) appData = JSON.parse(raw);
-                appData.siswa.splice(index, 1);
+                appData.siswa = (appData.siswa || []).filter(s => s.absen !== absen);
                 localStorage.setItem('classPortalData', JSON.stringify(appData));
                 renderAdminStudents();
-                showToast("Siswa berhasil dihapus.");
+                showToast("Siswa dihapus.");
             }
         }
 
@@ -1020,17 +1080,13 @@
             container.innerHTML = Object.entries(piketObj).map(([day, members]) => `
                 <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between gap-4">
                     <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <h4 class="font-bold text-white text-base">${day}</h4>
-                            <span class="text-xs px-2.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold">${members.length} Petugas</span>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-white text-base"><i class="fa-solid fa-calendar-day text-blue-400 mr-2"></i> ${day}</h4>
+                            <button onclick="editPiketDay('${day}')" class="px-3 py-1 bg-blue-600/20 text-blue-300 text-xs font-bold rounded-lg hover:bg-blue-600/30">Edit Piket</button>
                         </div>
-                        <ul class="space-y-1 text-sm text-slate-300">
-                            ${members.map(m => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400 text-xs"></i> ${m}</li>`).join('')}
+                        <ul class="space-y-1 text-xs text-slate-300">
+                            ${members.map((m, i) => `<li><span class="text-blue-400 font-semibold">${i+1}.</span> ${m}</li>`).join('')}
                         </ul>
-                    </div>
-                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-900">
-                        <button onclick="openEditPiket('${day}')" class="px-3 py-1.5 bg-blue-600/20 text-blue-400 text-xs font-bold rounded-lg hover:bg-blue-600/30">Edit Piket</button>
-                        <button onclick="deletePiketDay('${day}')" class="px-3 py-1.5 bg-rose-500/20 text-rose-300 text-xs font-bold rounded-lg hover:bg-rose-500/30">Hapus Hari</button>
                     </div>
                 </div>
             `).join('');
@@ -1038,15 +1094,18 @@
 
         function openAddPiketModal() {
             document.getElementById('modalPiketTitle').innerText = "Tambah / Edit Jadwal Piket";
-            document.getElementById('piketForm').reset();
+            document.getElementById('inputPiketHari').value = "";
+            document.getElementById('inputPiketAnggota').value = "";
             document.getElementById('piketModal').classList.remove('hidden');
         }
 
-        function openEditPiket(day) {
-            document.getElementById('modalPiketTitle').innerText = `Edit Piket Hari ${day}`;
-            document.getElementById('inputPiketHari').value = day;
+        function editPiketDay(day) {
+            const raw = localStorage.getItem('classPortalData');
+            if (raw) appData = JSON.parse(raw);
             const members = appData.piket[day] || [];
-            document.getElementById('inputPiketAnggota').value = members.join(", ");
+            document.getElementById('modalPiketTitle').innerText = `Edit Petugas Piket (${day})`;
+            document.getElementById('inputPiketHari').value = day;
+            document.getElementById('inputPiketAnggota').value = members.join(', ');
             document.getElementById('piketModal').classList.remove('hidden');
         }
 
@@ -1055,8 +1114,10 @@
         function handleSavePiket(e) {
             e.preventDefault();
             const day = document.getElementById('inputPiketHari').value.trim();
-            const anggotaRaw = document.getElementById('inputPiketAnggota').value.trim();
-            const members = anggotaRaw.split(',').map(m => m.trim()).filter(m => m.length > 0);
+            const membersStr = document.getElementById('inputPiketAnggota').value.trim();
+            if (!day || !membersStr) return;
+
+            const members = membersStr.split(',').map(m => m.trim()).filter(m => m.length > 0);
 
             const raw = localStorage.getItem('classPortalData');
             if (raw) appData = JSON.parse(raw);
@@ -1066,18 +1127,7 @@
             localStorage.setItem('classPortalData', JSON.stringify(appData));
             closePiketModal();
             renderAdminPiket();
-            showToast("Jadwal piket berhasil diperbarui!");
-        }
-
-        function deletePiketDay(day) {
-            if (confirm(`Hapus jadwal piket hari ${day}?`)) {
-                const raw = localStorage.getItem('classPortalData');
-                if (raw) appData = JSON.file ? JSON.parse(raw) : JSON.parse(raw);
-                delete appData.piket[day];
-                localStorage.setItem('classPortalData', JSON.stringify(appData));
-                renderAdminPiket();
-                showToast("Jadwal piket dihapus.");
-            }
+            showToast(`Jadwal piket hari ${day} berhasil disimpan!`);
         }
 
         function showToast(msg) {
