@@ -4,629 +4,1426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Portal Resmi Kelas</title>
-    <!-- Tailwind CSS CDN -->
+    <title>XII MERDEKA 7 - Website Resmi Kelas</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        primary: '#1D4ED8', // Deep Blue
+                        primaryDark: '#1E40AF',
+                        accent: '#FACC15', // Yellow Accent
+                        accentHover: '#EAB308',
+                        surface: '#F8FAFC',
+                    },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-        }
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+<body class="bg-surface text-slate-800 antialiased min-h-screen flex flex-col selection:bg-primary selection:text-white">
 
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div id="navLogoContainer" class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0">
-                    <i class="fa-solid fa-graduation-cap text-xl" id="navLogoIcon"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Portal Resmi</span>
-                    <h1 class="text-lg font-extrabold text-slate-900 tracking-tight" id="navClassName">KELAS XII IPA 1</h1>
-                </div>
-            </div>
-
-            <!-- Desktop Nav Links -->
-            <nav class="hidden md:flex items-center gap-1 font-semibold text-sm text-slate-600">
-                <a href="#beranda" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Beranda</a>
-                <a href="#struktur" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Struktur</a>
-                <a href="#siswa" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Daftar Siswa</a>
-                <a href="#piket" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Jadwal Piket</a>
-                <a href="#kenangan" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Galeri & Video</a>
-                <a href="#pesan" class="px-4 py-2 rounded-xl hover:bg-slate-100 hover:text-blue-600 transition">Dinding Pesan</a>
-            </nav>
-
-            <button class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100" onclick="toggleMobileMenu()">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 border-t border-slate-100 bg-white space-y-1">
-            <a href="#beranda" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Beranda</a>
-            <a href="#struktur" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Struktur</a>
-            <a href="#siswa" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Daftar Siswa</a>
-            <a href="#piket" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Jadwal Piket</a>
-            <a href="#kenangan" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Galeri & Video</a>
-            <a href="#pesan" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl hover:bg-blue-50 hover:text-blue-600 font-medium">Dinding Pesan</a>
-        </div>
-    </header>
-
-    <main>
-        <section id="beranda" class="relative pt-16 pb-24 overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-slate-50">
-            <div class="absolute inset-0 -z-10 opacity-30">
-                <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-300 rounded-full blur-3xl"></div>
-            </div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm mb-6 shadow-sm">
-                    <i class="fa-solid fa-sparkles"></i> <span id="heroBadge">Angkatan Aktif • Solid & Berprestasi</span>
-                </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
-                    Selamat Datang di Portal <br><span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent" id="heroClassName">XII IPA 1</span>
-                </h1>
-                <p class="max-w-2xl mx-auto text-lg text-slate-600 mb-10 leading-relaxed" id="heroTagline">
-                    Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#siswa" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-xl shadow-blue-200 transition transform hover:-translate-y-0.5 flex items-center gap-3">
-                        <i class="fa-solid fa-users"></i> Lihat Daftar Siswa
-                    </a>
-                    <a href="#pesan" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-2xl border border-slate-200 shadow-sm transition transform hover:-translate-y-0.5 flex items-center gap-3">
-                        <i class="fa-solid fa-paper-plane text-blue-600"></i> Kirim Pesan
-                    </a>
-                </div>
-
-                <!-- Wali Kelas Spotlight Card tanpa foto profil -->
-                <div class="mt-20 max-w-xl mx-auto bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100 text-center sm:text-left">
-                    <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-800 text-xs font-bold rounded-lg mb-2">Wali Kelas Kami</span>
-                    <h3 class="text-xl font-bold text-slate-900" id="waliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
-                    <p class="text-sm text-slate-500 mt-1 mb-3">Guru Mata Pelajaran Teladan & Pembina Kelas.</p>
-                    <div class="flex items-center justify-center sm:justify-start gap-2 text-xs font-semibold text-blue-600">
-                        <i class="fa-solid fa-quote-left text-slate-300"></i>
-                        <span id="waliQuote">"Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten."</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="struktur" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Hierarki & Kepengurusan</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Bagan Struktur Organisasi Kelas</h2>
-                    <p class="text-slate-600 mt-2">Bagan hirarki kepengurusan inti kelas secara formal dari Pembina hingga Pengurus.</p>
-                </div>
-
-                <!-- Bagan Struktur Formal (Org Chart Tree) dengan Scroll Center -->
-                <div class="w-full overflow-x-auto py-6 px-4">
-                    <div class="min-w-[850px] mx-auto flex flex-col items-center">
-                        
-                        <!-- Level 1: Wali Kelas (Tanpa Foto) -->
-                        <div class="flex flex-col items-center">
-                            <div class="w-80 bg-gradient-to-tr from-blue-700 to-cyan-600 text-white rounded-3xl p-6 text-center shadow-xl border border-blue-400 relative">
-                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-white text-blue-700 text-xs font-extrabold rounded-full shadow">WALI KELAS</span>
-                                <div class="w-16 h-16 rounded-2xl bg-white/20 text-white font-extrabold text-xl flex items-center justify-center mx-auto mb-3 border border-white/30" id="baganWaliInisial">WK</div>
-                                <h3 class="text-lg font-bold" id="baganWaliNama">Drs. H. Ahmad Fauzi, M.Pd.</h3>
-                                <p class="text-xs text-blue-100 mt-1">Pembina & Pengarah Kelas</p>
-                            </div>
-                            <div class="w-0.5 h-8 bg-blue-300"></div>
-                        </div>
-
-                        <!-- Connector Horizontal for Level 2 (Ketua & Wakil) -->
-                        <div class="relative w-[540px] h-0.5 bg-blue-300">
-                            <div class="absolute left-0 top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <div class="absolute right-0 top-0 w-0.5 h-6 bg-blue-300"></div>
-                        </div>
-
-                        <!-- Level 2: Ketua & Wakil Ketua Kelas -->
-                        <div class="w-full max-w-[640px] flex justify-between pt-6 gap-8">
-                            <!-- Ketua Kelas -->
-                            <div class="w-72 bg-white rounded-3xl p-5 text-center shadow-md border-2 border-blue-600 relative">
-                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-xs font-extrabold rounded-full shadow">KETUA KELAS</span>
-                                <div id="baganKetuaAvatarBox"></div>
-                                <h4 class="font-bold text-slate-900 text-base" id="baganKetuaNama">Muhammad Farhan</h4>
-                                <p class="text-xs text-slate-500 mt-1" id="baganKetuaDesc">Pemimpin Umum Kelas</p>
-                            </div>
-
-                            <!-- Wakil Ketua -->
-                            <div class="w-72 bg-white rounded-3xl p-5 text-center shadow-md border-2 border-blue-500 relative">
-                                <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-500 text-white text-xs font-extrabold rounded-full shadow">WAKIL KETUA</span>
-                                <div id="baganWakilAvatarBox"></div>
-                                <h4 class="font-bold text-slate-900 text-base" id="baganWakilNama">Siti Rahmawati</h4>
-                                <p class="text-xs text-slate-500 mt-1" id="baganWakilDesc">Koordinator Internal & Acara</p>
-                            </div>
-                        </div>
-
-                        <!-- Vertical Line Down from Level 2 -->
-                        <div class="flex justify-between w-[540px]">
-                            <div class="w-0.5 h-6 bg-blue-300 ml-36"></div>
-                            <div class="w-0.5 h-6 bg-blue-300 mr-36"></div>
-                        </div>
-
-                        <!-- Connector Horizontal for Level 3 -->
-                        <div class="relative w-[740px] h-0.5 bg-blue-300">
-                            <div class="absolute left-2 top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <div class="absolute left-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <div class="absolute right-[33%] top-0 w-0.5 h-6 bg-blue-300"></div>
-                            <div class="absolute right-2 top-0 w-0.5 h-6 bg-blue-300"></div>
-                        </div>
-
-                        <!-- Level 3: Sekretaris & Bendahara -->
-                        <div class="w-full max-w-[820px] flex justify-between pt-6 gap-4">
-                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-600 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 1</span>
-                                <div id="baganSek1AvatarBox" class="flex justify-center mb-2"></div>
-                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek1Nama">Dewi Lestari</h5>
-                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganSek1Desc">Administrasi</p>
-                            </div>
-                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-500 text-white text-[10px] font-bold rounded-full shadow">SEKRETARIS 2</span>
-                                <div id="baganSek2AvatarBox" class="flex justify-center mb-2"></div>
-                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganSek2Nama">-</h5>
-                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganSek2Desc">Surat-menyurat</p>
-                            </div>
-                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-cyan-600 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 1</span>
-                                <div id="baganBen1AvatarBox" class="flex justify-center mb-2"></div>
-                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen1Nama">Rizky Pratama</h5>
-                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganBen1Desc">Keuangan Utama</p>
-                            </div>
-                            <div class="w-44 bg-white rounded-3xl p-4 text-center shadow-sm border border-slate-200 relative">
-                                <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full shadow">BENDAHARA 2</span>
-                                <div id="baganBen2AvatarBox" class="flex justify-center mb-2"></div>
-                                <h5 class="font-bold text-slate-900 text-xs truncate" id="baganBen2Nama">-</h5>
-                                <p class="text-[11px] text-slate-500 truncate mt-0.5" id="baganBen2Desc">Pencatatan Kas</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="siswa" class="py-20 bg-slate-50 border-t border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-                    <div>
-                        <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Anggota Kelas</span>
-                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Daftar Siswa & Siswi</h2>
-                        <p class="text-slate-600 mt-1">Daftar lengkap seluruh anggota keluarga besar kelas.</p>
-                    </div>
-                    <div class="relative w-full md:w-72">
-                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                            <i class="fa-solid fa-search"></i>
-                        </span>
-                        <input type="text" id="searchSiswa" oninput="filterSiswa()" placeholder="Cari nama atau absen..." class="w-full pl-10 pr-4 py-3 bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm shadow-sm">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="siswaContainer"></div>
-            </div>
-        </section>
-
-        <section id="piket" class="py-20 bg-white border-t border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Kedisiplinan & Kebersihan</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Jadwal Piket Kebersihan</h2>
-                    <p class="text-slate-600 mt-2">Pilih hari untuk melihat petugas piket yang bertugas menjaga kebersihan.</p>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-2 mb-10" id="dayTabs"></div>
-
-                <div class="max-w-xl mx-auto bg-gradient-to-br from-blue-900 to-slate-900 text-white rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
-                        <i class="fa-solid fa-broom"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-1" id="selectedDayTitle">Senin</h3>
-                    <p class="text-blue-200 text-sm mb-6">Pastikan kelas bersih sebelum jam pelajaran pertama dimulai.</p>
-                    <ul class="space-y-3" id="piketMemberList"></ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="kenangan" class="py-20 bg-slate-50 border-t border-slate-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                    <div>
-                        <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Dokumentasi & Momen Indah</span>
-                        <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Galeri Foto & Video Kelas</h2>
-                        <p class="text-slate-600 mt-1">Kumpulan momen foto dan video kegiatan kelas.</p>
-                    </div>
-                </div>
-
-                <!-- Bagian Video Utama / Sorotan -->
-                <div class="mb-16">
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                        <i class="fa-solid fa-video text-blue-600"></i> Video Dokumentasi Kelas
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="videosContainer"></div>
-                </div>
-
-                <!-- Bagian Galeri Foto -->
-                <div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                        <i class="fa-solid fa-images text-blue-600"></i> Galeri Foto Kegiatan
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="memoriesContainer"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="pesan" class="py-20 bg-white border-t border-slate-100">
-            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10">
-                    <span class="text-blue-600 font-bold text-sm tracking-wider uppercase">Ruang Interaksi</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Dinding Pesan Kelas</h2>
-                    <p class="text-slate-600 mt-1 text-sm">Kirim pesan, dukungan, atau kesan untuk kelas atau pengurus.</p>
-                </div>
-                
-                <form onsubmit="handlePostMessage(event)" class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Nama Pengirim</label>
-                        <input type="text" id="msgName" required placeholder="Nama Anda / Pengunjung" class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Ditujukan Kepada</label>
-                        <input type="text" id="msgTarget" required placeholder="Contoh: Seluruh Warga Kelas / Wali Kelas" class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Pesan / Kesan</label>
-                        <textarea id="msgContent" required rows="3" placeholder="Tuliskan pesan Anda di sini..." class="w-full px-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
-                    <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200 transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> Kirim Pesan ke Dinding
-                    </button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-slate-950 text-white py-12 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-            <div>
-                <h3 class="text-lg font-bold" id="footerClassName">XII IPA 1 Portal</h3>
-                <p class="text-xs text-slate-400 mt-1">Website resmi kelas interaktif.</p>
-            </div>
-            <div class="flex items-center gap-4 text-sm text-slate-400">
-                <a href="https://www.instagram.com/twelve.society7?stkn=MTE0djhncjZxenZvcQ==" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition">
-                    <i class="fa-brands fa-instagram text-pink-500 text-lg"></i> @twelve.society7
-                </a>
-            </div>
-            <div class="flex items-center gap-4 text-sm text-slate-400">
-                <span>&copy; 2026 Seluruh Hak Cipta Dilindungi</span>
+    <div id="notificationModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden transition-all duration-300">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="modalContent">
+            <div class="text-center">
+                <div id="modalIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl"></div>
+                <h3 id="modalTitle" class="text-lg font-bold text-slate-900 mb-2"></h3>
+                <p id="modalMessage" class="text-sm text-slate-600 mb-6"></p>
+                <button onclick="closeModal()" class="w-full py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primaryDark transition shadow-lg shadow-primary/20">OK, Mengerti</button>
             </div>
         </div>
-    </footer>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-sm font-semibold border border-slate-700">
-        <i class="fa-solid fa-circle-check text-blue-400"></i>
-        <span id="toastMsg">Berhasil!</span>
     </div>
 
-    <script>
-        const defaultData = {
-            className: "XII IPA 1",
-            heroBadge: "Angkatan Aktif • Solid & Berprestasi",
-            tagline: "Tempat berkumpulnya kreativitas, informasi jadwal, daftar struktur, galeri foto & video, serta ruang berbagi pesan antar anggota kelas dan pengunjung umum!",
-            logoImg: "",
-            bannerFoto: "https://placehold.co/1200x600/1e293b/38bdf8?text=Banner+Utama+Kelas",
-            wali: {
-                nama: "Drs. H. Ahmad Fauzi, M.Pd.",
-                quote: "Kesuksesan adalah hasil dari kerja keras, disiplin, dan doa yang konsisten."
+    <div id="publicView" class="flex flex-col min-h-screen">
+        <!-- Public Navigation Bar -->
+        <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo / Class Title -->
+                    <a href="#beranda" class="flex items-center gap-3 group">
+                        <div class="w-11 h-11 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-lg shadow-md shadow-primary/20 group-hover:scale-105 transition">
+                            7
+                        </div>
+                        <div>
+                            <span class="text-lg font-bold text-slate-900 block leading-tight">XII MERDEKA 7</span>
+                            <span class="text-xs font-medium text-slate-500" id="navSchoolNameHeader">Website Resmi Kelas</span>
+                        </div>
+                    </a>
+
+                    <!-- Desktop Nav Links -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                        <a href="#beranda" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Beranda</a>
+                        <a href="#tentang" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Tentang</a>
+                        <a href="#walikelas" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Wali Kelas</a>
+                        <a href="#siswa" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Siswa</a>
+                        <a href="#piket" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Piket</a>
+                        <a href="#dokumentasi" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Dokumentasi</a>
+                        <a href="#pesan" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50 transition">Pesan</a>
+                    </nav>
+
+                    <!-- Right Action: Admin Switcher & Mobile Menu Toggle -->
+                    <div class="flex items-center gap-3">
+                        <button onclick="switchToAdmin()" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 hover:border-slate-300 transition shadow-sm">
+                            <i class="fa-solid fa-lock text-primary text-xs"></i> Admin Login
+                        </button>
+                        <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:bg-slate-100 transition">
+                            <i class="fa-solid fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Drawer -->
+            <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+                <a href="#beranda" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Beranda</a>
+                <a href="#tentang" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Tentang Kelas</a>
+                <a href="#walikelas" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Wali Kelas</a>
+                <a href="#siswa" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Daftar Siswa</a>
+                <a href="#piket" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Jadwal Piket</a>
+                <a href="#dokumentasi" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Dokumentasi</a>
+                <a href="#pesan" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Pesan untuk Kelas</a>
+                <div class="pt-2 border-t border-slate-100">
+                    <button onclick="switchToAdmin()" class="w-full py-2.5 px-4 bg-primary text-white font-semibold rounded-xl text-center text-sm shadow-md">
+                        <i class="fa-solid fa-lock mr-2"></i> Masuk Admin Panel
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section id="beranda" class="relative bg-gradient-to-br from-primary via-blue-700 to-indigo-900 text-white overflow-hidden py-24 lg:py-32">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent text-slate-900 font-bold text-xs uppercase tracking-wider shadow-md">
+                            <i class="fa-solid fa-star text-amber-700"></i> Website Resmi Kelas
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            XII MERDEKA <span class="text-accent">7</span>
+                        </h1>
+                        <p id="heroSchoolName" class="text-lg sm:text-xl text-blue-100 font-medium">
+                            SMA Negeri Unggulan
+                        </p>
+                        <p id="heroDescription" class="text-blue-100/90 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Selamat datang di portal resmi kelas XII Merdeka 7. Tempat bersatunya solidaritas, prestasi, dan kenangan indah masa SMA.
+                        </p>
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#tentang" class="px-6 py-3.5 bg-accent text-slate-900 font-bold rounded-xl shadow-lg shadow-accent/20 hover:bg-accentHover transition duration-200">
+                                Jelajahi Kelas <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <a href="#dokumentasi" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl backdrop-blur-md border border-white/20 transition duration-200">
+                                Lihat Kenangan
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 bg-slate-800">
+                            <img id="heroBannerImg" src="https://placehold.co/600x450/1d4ed8/ffffff?text=XII+MERDEKA+7" alt="Banner Kelas" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x450/1d4ed8/ffffff?text=XII+MERDEKA+7'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                                <div class="text-white">
+                                    <p class="text-xs uppercase tracking-widest text-accent font-bold">Solid & Berprestasi</p>
+                                    <h4 class="text-lg font-bold">Angkatan 2026</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Informasi Kelas</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Profil & Keterangan Kelas</h2>
+                    <p class="text-slate-600 text-base sm:text-lg">Mengenal lebih dekat identitas dan tahun ajaran kelas XII Merdeka 7.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-surface p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-100 text-primary flex items-center justify-center text-2xl font-bold mb-6">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Nama Sekolah</h3>
+                        <p id="aboutSchoolName" class="text-slate-600 font-medium">Memuat data sekolah...</p>
+                    </div>
+                    <div class="bg-surface p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-bold mb-6">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Tahun Ajaran</h3>
+                        <p id="aboutAcademicYear" class="text-slate-600 font-medium">Memuat tahun ajaran...</p>
+                    </div>
+                    <div class="bg-surface p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl font-bold mb-6">
+                            <i class="fa-solid fa-users-rectangle"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Jumlah Siswa</h3>
+                        <p id="aboutTotalStudents" class="text-slate-600 font-medium">Memuat jumlah siswa...</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 bg-blue-50/60 border border-blue-100 rounded-3xl p-8 sm:p-10">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-circle-info text-primary"><span>Deskripsi Lengkap Kelas</span></i>
+                    </h3>
+                    <p id="aboutClassDescription" class="text-slate-700 leading-relaxed text-base sm:text-lg">
+                        Belum ada deskripsi kelas yang ditambahkan oleh admin.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="walikelas" class="py-20 bg-surface border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Pendidik Teladan</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Wali Kelas XII Merdeka 7</h2>
+                    <p class="text-slate-600 text-base sm:text-lg">Sosok pembimbing yang senantiasa membimbing dan mengarahkan kami.</p>
+                </div>
+
+                <div id="homeroomTeacherContainer" class="max-w-xl mx-auto">
+                    <!-- Dynamic Homeroom Card or Empty State -->
+                </div>
+            </div>
+        </section>
+
+        <section id="siswa" class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div>
+                        <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Anggota Kelas</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-2">Daftar Siswa</h2>
+                        <p class="text-slate-600 text-base sm:text-lg">Keluarga besar XII Merdeka 7.</p>
+                    </div>
+                    <div class="w-full md:w-72">
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                <i class="fa-solid fa-search"></i>
+                            </span>
+                            <input type="text" id="studentSearchInput" onkeyup="filterStudents()" placeholder="Cari nama siswa..." class="w-full pl-10 pr-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="studentsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- Dynamic Students Grid -->
+                </div>
+            </div>
+        </section>
+
+        <section id="piket" class="py-20 bg-surface border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Kedisiplinan Kelas</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Jadwal Piket Kebersihan</h2>
+                    <p class="text-slate-600 text-base sm:text-lg">Daftar petugas piket harian kelas XII Merdeka 7.</p>
+                </div>
+
+                <div id="scheduleContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic Schedule Cards -->
+                </div>
+            </div>
+        </section>
+
+        <section id="dokumentasi" class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Kenangan Indah</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Dokumentasi & Galeri</h2>
+                    <p class="text-slate-600 text-base sm:text-lg">Momen berharga perjalanan kami di kelas XII Merdeka 7.</p>
+                </div>
+
+                <div id="documentationGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic Documentation Cards -->
+                </div>
+            </div>
+        </section>
+
+        <section id="pesan" class="py-20 bg-surface border-t border-slate-100">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full">Suara Pengunjung</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Pesan untuk XII Merdeka 7</h2>
+                    <p class="text-slate-600 text-base">Punya kesan, pesan, atau pertanyaan untuk kelas kami? Kirimkan pesanmu di sini.</p>
+                </div>
+
+                <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-100 shadow-xl">
+                    <form id="publicMessageForm" onsubmit="submitPublicMessage(event)" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Pengunjung / Pengirim</label>
+                            <input type="text" id="visitorName" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Pesan atau Kesan</label>
+                            <textarea id="visitorMessage" rows="4" required placeholder="Tuliskan pesanmu untuk kelas XII Merdeka 7..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition duration-200 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Public Footer -->
+        <footer class="bg-slate-900 text-white py-12 border-t border-slate-800 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold">7</div>
+                    <span class="text-lg font-bold tracking-tight">XII MERDEKA 7</span>
+                </div>
+                <p class="text-sm text-slate-400">Website Resmi Kelas XII Merdeka 7 &bull; Solid, Kompak, dan Berprestasi.</p>
+                <p class="text-xs text-slate-500">&copy; 2026 XII Merdeka 7. Hak Cipta Dilindungi.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl p-2 hover:text-accent transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full flex flex-col items-center">
+            <img id="lightboxImg" src="" alt="Preview" class="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl mb-4">
+            <div id="lightboxCaption" class="text-white text-center">
+                <h3 id="lightboxTitle" class="text-xl font-bold mb-1"></h3>
+                <p id="lightboxDesc" class="text-sm text-slate-300"></p>
+                <p id="lightboxDate" class="text-xs text-accent mt-2 font-medium"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminLoginView" class="hidden min-h-screen bg-slate-900 flex items-center justify-center px-4">
+        <div class="max-w-md w-full bg-white rounded-3xl p-8 sm:p-10 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-blue-100 text-primary rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-md">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Admin Login</h2>
+                <p class="text-sm text-slate-500 mt-1">Kelola seluruh konten website XII Merdeka 7</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Username Admin</label>
+                    <input type="text" id="adminUser" required placeholder="Masukkan username..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+                    <input type="password" id="adminPass" required placeholder="Masukkan password..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition">
+                    Masuk ke Panel Admin
+                </button>
+            </form>
+            <div class="mt-6 text-center">
+                <button onclick="switchToPublic()" class="text-sm text-slate-500 hover:text-primary font-medium transition">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Website Publik
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminDashboardView" class="hidden min-h-screen bg-surface flex flex-col">
+        <!-- Admin Header -->
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary text-white rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-900">Admin Dashboard</h1>
+                        <p class="text-xs text-slate-500">XII Merdeka 7 Management System</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="switchToPublic()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition">
+                        <i class="fa-solid fa-globe mr-2"></i> Lihat Web Publik
+                    </button>
+                    <button onclick="handleAdminLogout()" class="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-sm font-semibold transition">
+                        <i class="fa-solid fa-right-from-bracket mr-2"></i> Keluar
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Admin Main Layout -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Sidebar Tabs -->
+            <div class="lg:col-span-3 space-y-2">
+                <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-sm space-y-1">
+                    <button onclick="switchAdminTab('overview')" id="tabBtn-overview" class="w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3 transition bg-primary text-white shadow-md shadow-primary/20">
+                        <i class="fa-solid fa-chart-pie w-5"></i> Dashboard Statistik
+                    </button>
+                    <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-gear w-5"></i> Pengaturan Website
+                    </button>
+                    <button onclick="switchAdminTab('walikelas')" id="tabBtn-walikelas" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-chalkboard-user w-5"></i> Data Wali Kelas
+                    </button>
+                    <button onclick="switchAdminTab('siswa')" id="tabBtn-siswa" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-users w-5"></i> Data Siswa
+                    </button>
+                    <button onclick="switchAdminTab('piket')" id="tabBtn-piket" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-clipboard-list w-5"></i> Jadwal Piket
+                    </button>
+                    <button onclick="switchAdminTab('dokumentasi')" id="tabBtn-dokumentasi" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition">
+                        <i class="fa-solid fa-images w-5"></i> Dokumentasi
+                    </button>
+                    <button onclick="switchAdminTab('pesan')" id="tabBtn-pesan" class="w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center justify-between text-slate-600 hover:bg-slate-50 transition">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-envelope w-5"></i> Pesan Masuk</span>
+                        <span id="unreadBadge" class="bg-rose-500 text-white text-xs font-bold px-2 py-0.5 rounded-full hidden">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="lg:col-span-9 space-y-6">
+                <!-- Tab: Overview -->
+                <div id="adminTab-overview" class="admin-tab-content space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm font-semibold text-slate-500">Total Siswa</span>
+                                <div class="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                            </div>
+                            <h3 id="statTotalStudents" class="text-3xl font-bold text-slate-900">0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm font-semibold text-slate-500">Dokumentasi</span>
+                                <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-images"></i>
+                                </div>
+                            </div>
+                            <h3 id="statTotalDocs" class="text-3xl font-bold text-slate-900">0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm font-semibold text-slate-500">Jadwal Piket</span>
+                                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                            </div>
+                            <h3 id="statTotalSchedule" class="text-3xl font-bold text-slate-900">0</h3>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm font-semibold text-slate-500">Pesan Masuk</span>
+                                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                            </div>
+                            <h3 id="statTotalMessages" class="text-3xl font-bold text-slate-900">0</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Selamat Datang di Panel Admin XII Merdeka 7</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Gunakan menu navigasi di sebelah kiri untuk mengelola informasi website publik, data wali kelas, daftar siswa, jadwal piket, dokumentasi kegiatan kelas, serta membalas atau memeriksa pesan dari pengunjung secara real-time.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tab: Website Settings -->
+                <div id="adminTab-settings" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-gear text-primary"></i> Pengaturan Umum & Profil Website
+                        </h3>
+                        <form onsubmit="saveWebsiteSettings(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Sekolah</label>
+                                <input type="text" id="settingSchoolName" required class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Tahun Ajaran</label>
+                                <input type="text" id="settingAcademicYear" required class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">URL Foto Profil / Banner Utama Kelas (Link Gambar)</label>
+                                <input type="url" id="settingBannerImg" required placeholder="https://..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                                <p class="text-xs text-slate-400 mt-1">Masukkan URL gambar valid untuk banner utama di beranda.</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Singkat / Lengkap Kelas</label>
+                                <textarea id="settingClassDesc" rows="4" required class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <button type="submit" class="py-3 px-6 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition">
+                                Simpan Perubahan Website
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tab: Homeroom Teacher -->
+                <div id="adminTab-walikelas" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-chalkboard-user text-primary"></i> Pengelolaan Data Wali Kelas
+                        </h3>
+                        <form onsubmit="saveHomeroomTeacher(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Lengkap Wali Kelas & Gelar</label>
+                                <input type="text" id="teacherName" required placeholder="Contoh: Dra. Hj. Siti Aminah, M.Pd." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">URL Foto Wali Kelas (Link Gambar)</label>
+                                <input type="url" id="teacherPhoto" required placeholder="https://..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2">Keterangan / Sambutan Wali Kelas</label>
+                                <textarea id="teacherDesc" rows="4" required placeholder="Pesan atau deskripsi singkat mengenai wali kelas..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary"></textarea>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button type="submit" class="py-3 px-6 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition">
+                                    Simpan Data Wali Kelas
+                                </button>
+                                <button type="button" onclick="deleteHomeroomTeacher()" class="py-3 px-6 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold rounded-xl transition">
+                                    Hapus Data Wali Kelas
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tab: Students -->
+                <div id="adminTab-siswa" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3">
+                                <i class="fa-solid fa-users text-primary"></i> Pengelolaan Data Siswa
+                            </h3>
+                            <button onclick="openStudentModal()" class="py-2.5 px-5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Tambah Siswa Baru
+                            </button>
+                        </div>
+                        <div id="adminStudentsTable" class="overflow-x-auto">
+                            <!-- Dynamic Students Admin Table -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Schedule -->
+                <div id="adminTab-piket" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3">
+                                <i class="fa-solid fa-clipboard-list text-primary"></i> Pengelolaan Jadwal Piket
+                            </h3>
+                            <button onclick="openScheduleModal()" class="py-2.5 px-5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Tambah Jadwal Piket
+                            </button>
+                        </div>
+                        <div id="adminScheduleTable" class="overflow-x-auto">
+                            <!-- Dynamic Schedule Admin Table -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Documentation -->
+                <div id="adminTab-dokumentasi" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3">
+                                <i class="fa-solid fa-images text-primary"></i> Pengelolaan Dokumentasi & Kenangan
+                            </h3>
+                            <button onclick="openDocModal()" class="py-2.5 px-5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Tambah Dokumentasi
+                            </button>
+                        </div>
+                        <div id="adminDocTable" class="overflow-x-auto">
+                            <!-- Dynamic Documentation Admin Table -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Messages -->
+                <div id="adminTab-pesan" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-primary"></i> Pesan Masuk dari Pengunjung
+                        </h3>
+                        <div id="adminMessagesList" class="space-y-4">
+                            <!-- Dynamic Messages List -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Modal -->
+    <div id="studentModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 id="studentModalTitle" class="text-xl font-bold text-slate-900 mb-6">Tambah Siswa Baru</h3>
+            <form onsubmit="saveStudent(event)" class="space-y-4">
+                <input type="hidden" id="studentId">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Lengkap Siswa</label>
+                    <input type="text" id="studentNameInput" required placeholder="Nama siswa..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">URL Foto Siswa (Link Gambar)</label>
+                    <input type="url" id="studentPhotoInput" placeholder="https://..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                    <p class="text-xs text-slate-400 mt-1">Kosongkan untuk menggunakan placeholder otomatis.</p>
+                </div>
+                <div class="flex items-center justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeStudentModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 id="scheduleModalTitle" class="text-xl font-bold text-slate-900 mb-6">Tambah Jadwal Piket</h3>
+            <form onsubmit="saveSchedule(event)" class="space-y-4">
+                <input type="hidden" id="scheduleId">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Hari</label>
+                    <select id="scheduleDayInput" required class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                        <option value="Sabtu">Sabtu</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Daftar Nama Siswa Petugas (Pisahkan dengan koma)</label>
+                    <textarea id="scheduleMembersInput" rows="3" required placeholder="Contoh: Ahmad, Siti, Budi..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary"></textarea>
+                </div>
+                <div class="flex items-center justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeScheduleModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Documentation Modal -->
+    <div id="docModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 id="docModalTitle" class="text-xl font-bold text-slate-900 mb-6">Tambah Dokumentasi</h3>
+            <form onsubmit="saveDoc(event)" class="space-y-4">
+                <input type="hidden" id="docId">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Dokumentasi / Kegiatan</label>
+                    <input type="text" id="docTitleInput" required placeholder="Contoh: Kerja Bakti Kelas" class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">URL Foto Dokumentasi (Link Gambar)</label>
+                    <input type="url" id="docPhotoInput" required placeholder="https://..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tanggal</label>
+                    <input type="text" id="docDateInput" required placeholder="Contoh: 12 Oktober 2026" class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Singkat</label>
+                    <textarea id="docDescInput" rows="3" required placeholder="Keterangan singkat momen kegiatan..." class="w-full px-4 py-3 bg-surface border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-primary"></textarea>
+                </div>
+                <div class="flex items-center justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeDocModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">Batal</button>
+                    <button type="submit" class="px-5 py-2.5 bg-primary hover:bg-primaryDark text-white font-bold rounded-xl text-sm shadow-md transition">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase Configuration
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'xii-merdeka-7-default';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+        let app, db, auth;
+        let currentUser = null;
+
+        // In-memory application state
+        let appData = {
+            settings: {
+                schoolName: "SMA Negeri Unggulan",
+                academicYear: "2025 / 2026",
+                bannerImg: "https://placehold.co/600x450/1d4ed8/ffffff?text=XII+MERDEKA+7",
+                classDesc: "Kelas XII Merdeka 7 adalah wadah bagi siswa-siswi pilihan yang menjunjung tinggi nilai kebersamaan, kedisiplinan, kreativitas, dan prestasi akademik maupun non-akademik."
             },
-            struktur: {
-                ketua: { nama: "Muhammad Farhan", desc: "Pemimpin Umum Kelas", foto: "" },
-                wakil: { nama: "Siti Rahmawati", desc: "Koordinator Internal & Acara", foto: "" },
-                sek1: { nama: "Dewi Lestari", desc: "Administrasi & Absensi", foto: "" },
-                sek2: { nama: "Alya Nabila", desc: "Surat-menyurat", foto: "" },
-                ben1: { nama: "Rizky Pratama", desc: "Pengelola Keuangan Utama", foto: "" },
-                ben2: { nama: "Anisa Fitri", desc: "Pencatatan Kas & Iuaran", foto: "" }
-            },
-            siswa: [
-                { absen: 1, nama: "Geril Suardi", gender: "L", hobi: "Sepak Bola", foto: "" },
-                { absen: 2, nama: "Alya Nabila", gender: "P", hobi: "Membaca Novel", foto: "" },
-                { absen: 3, nama: "Andika Pratama", gender: "L", hobi: "Gaming & Coding", foto: "" },
-                { absen: 4, nama: "Anisa Fitri", gender: "P", hobi: "Menyanyi", foto: "" },
-                { absen: 5, nama: "Dimas Anggara", gender: "L", hobi: "Basket", foto: "" },
-                { absen: 6, nama: "Fauziah Zahra", gender: "P", hobi: "Seni Lukis", foto: "" }
-            ],
-            piket: {
-                "Senin": ["Geril Suardi", "Alya Nabila", "Andika Pratama"],
-                "Selasa": ["Anisa Fitri", "Dimas Anggara", "Fauziah Zahra"],
-                "Rabu": ["Ilham Ramadhan", "Karin Novilda", "M. Al Fath"],
-                "Kamis": ["Nadia Safitri", "Reza Pahlevi", "Salsabila Putri"],
-                "Jumat": ["Seluruh Anggota Kelas (Piket Bersama)"]
-            },
-            memories: [
-                { id: 1, title: "Keseruan Perayaan HUT RI", date: "17 Agustus 2025", foto: "https://placehold.co/600x400/2563eb/ffffff?text=Lomba+17+Agustus" },
-                { id: 2, title: "Studi Wisata Laboratorium Sains", date: "10 Januari 2026", foto: "https://placehold.co/600x400/0891b2/ffffff?text=Studi+Wisata" },
-                { id: 3, title: "Malam Keakraban Kelas", date: "28 Februari 2026", foto: "https://placehold.co/600x400/3b82f6/ffffff?text=Makrab+Kelas" }
-            ],
-            videos: [
-                { id: 1, title: "Teaser Profil Kelas XII IPA 1", url: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
-            ],
+            teacher: null, // null if not set
+            students: [],
+            schedule: [],
+            documents: [],
             messages: []
         };
 
-        let appData = JSON.parse(localStorage.getItem('classPortalData')) || defaultData;
-        let currentDay = "Senin";
+        // Initialize Firebase
+        try {
+            if (Object.keys(firebaseConfig).length > 0) {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
 
-        window.addEventListener('DOMContentLoaded', () => {
-            renderAll();
-            const orgChartScroll = document.querySelector('#struktur .overflow-x-auto');
-            if (orgChartScroll) {
-                orgChartScroll.scrollLeft = (orgChartScroll.scrollWidth - orgChartScroll.clientWidth) / 2;
-            }
+                const initAuth = async () => {
+                    try {
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            await signInAnonymously(auth);
+                        }
+                    } catch (e) {
+                        await signInAnonymously(auth);
+                    }
+                };
 
-            window.addEventListener('focus', () => {
+                initAuth();
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUser = user;
+                        setupFirestoreListeners();
+                    }
+                });
+            } else {
+                // Fallback simulation if config is missing
+                console.warn("Firebase config not found. Running in local simulation mode.");
                 renderAll();
-            });
-            window.addEventListener('storage', (e) => {
-                if (e.key === 'classPortalData') {
-                    renderAll();
+            }
+        } catch (err) {
+            console.error("Firebase initialization error:", err);
+            renderAll();
+        }
+
+        // Firestore Realtime Listeners following RULE 1 & RULE 2
+        function setupFirestoreListeners() {
+            if (!currentUser || !db) return;
+
+            // 1. Settings Collection
+            const settingsRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings');
+            onSnapshot(settingsRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    appData.settings = docSnap.data();
+                } else {
+                    // Initialize default settings
+                    setDoc(settingsRef, appData.settings).catch(console.error);
                 }
-            });
-        });
+                renderAll();
+            }, (error) => console.error("Settings listener error:", error));
 
-        // Helper untuk mendapatkan Inisial nama secara akurat (Contoh: "Geril Suardi" -> "GS", "Ahmad" -> "A")
-        function getInitials(name) {
-            if (!name || name.trim() === "") return "?";
-            const parts = name.trim().split(/\s+/);
-            if (parts.length >= 2) {
-                return (parts[0][0] + parts[1][0]).toUpperCase();
-            }
-            return parts[0].substring(0, 2).toUpperCase();
-        }
-
-        // Render komponen Avatar foto atau kotak Inisial cantik (tanpa mencetak teks nama lengkap)
-        function renderAvatarBox(fotoUrl, name, sizeClass = "w-20 h-20", textClass = "text-xl") {
-            if (fotoUrl && fotoUrl.trim() !== "") {
-                return `<img src="${fotoUrl}" alt="${name}" class="${sizeClass} rounded-2xl object-cover shadow border border-slate-100" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\' ${sizeClass} rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold ${textClass} flex items-center justify-center shadow\\'>' + getInitials('${name}') + '</div>';">`;
-            } else {
-                return `<div class="${sizeClass} rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold ${textClass} flex items-center justify-center shadow">${getInitials(name)}</div>`;
-            }
-        }
-
-        function renderAll() {
-            const raw = localStorage.getItem('classPortalData');
-            if (!raw) {
-                localStorage.setItem('classPortalData', JSON.stringify(defaultData));
-                appData = defaultData;
-            } else {
-                appData = JSON.parse(raw);
-            }
-
-            document.getElementById('pageTitle').innerText = `Portal Resmi ${appData.className}`;
-            document.getElementById('navClassName').innerText = appData.className;
-            document.getElementById('heroBadge').innerText = appData.heroBadge;
-            document.getElementById('heroClassName').innerText = appData.className;
-            document.getElementById('heroTagline').innerText = appData.tagline;
-            document.getElementById('footerClassName').innerText = `${appData.className} Portal`;
-
-            // Render Logo Kelas di Navbar
-            const logoContainer = document.getElementById('navLogoContainer');
-            if (appData.logoImg && appData.logoImg.trim() !== "") {
-                logoContainer.innerHTML = `<img src="${appData.logoImg}" alt="Logo Kelas" class="w-full h-full object-cover">`;
-                logoContainer.className = "w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0 border border-slate-200";
-            } else {
-                logoContainer.innerHTML = `<i class="fa-solid fa-graduation-cap text-xl" id="navLogoIcon"></i>`;
-                logoContainer.className = "w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-blue-200 overflow-hidden flex-shrink-0";
-            }
-
-            document.getElementById('waliNama').innerText = appData.wali.nama;
-            document.getElementById('waliQuote').innerText = `"${appData.wali.quote}"`;
-
-            document.getElementById('baganWaliNama').innerText = appData.wali.nama;
-            document.getElementById('baganWaliInisial').innerText = getInitials(appData.wali.nama);
-
-            if (appData.struktur) {
-                const st = appData.struktur;
-                if (st.ketua) {
-                    document.getElementById('baganKetuaNama').innerText = st.ketua.nama;
-                    document.getElementById('baganKetuaDesc').innerText = st.ketua.desc;
-                    document.getElementById('baganKetuaAvatarBox').innerHTML = renderAvatarBox(st.ketua.foto, st.ketua.nama, "w-20 h-20", "text-xl");
+            // 2. Teacher Collection
+            const teacherRef = doc(db, 'artifacts', appId, 'public', 'data', 'teacher');
+            onSnapshot(teacherRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    appData.teacher = docSnap.data();
+                } else {
+                    appData.teacher = null;
                 }
-                if (st.wakil) {
-                    document.getElementById('baganWakilNama').innerText = st.wakil.nama;
-                    document.getElementById('baganWakilDesc').innerText = st.wakil.desc;
-                    document.getElementById('baganWakilAvatarBox').innerHTML = renderAvatarBox(st.wakil.foto, st.wakil.nama, "w-20 h-20", "text-xl");
-                }
-                if (st.sek1) {
-                    document.getElementById('baganSek1Nama').innerText = st.sek1.nama;
-                    document.getElementById('baganSek1Desc').innerText = st.sek1.desc;
-                    document.getElementById('baganSek1AvatarBox').innerHTML = renderAvatarBox(st.sek1.foto, st.sek1.nama, "w-16 h-16", "text-lg");
-                }
-                if (st.sek2) {
-                    document.getElementById('baganSek2Nama').innerText = st.sek2.nama;
-                    document.getElementById('baganSek2Desc').innerText = st.sek2.desc;
-                    document.getElementById('baganSek2AvatarBox').innerHTML = renderAvatarBox(st.sek2.foto, st.sek2.nama, "w-16 h-16", "text-lg");
-                }
-                if (st.ben1) {
-                    document.getElementById('baganBen1Nama').innerText = st.ben1.nama;
-                    document.getElementById('baganBen1Desc').innerText = st.ben1.desc;
-                    document.getElementById('baganBen1AvatarBox').innerHTML = renderAvatarBox(st.ben1.foto, st.ben1.nama, "w-16 h-16", "text-lg");
-                }
-                if (st.ben2) {
-                    document.getElementById('baganBen2Nama').innerText = st.ben2.nama;
-                    document.getElementById('baganBen2Desc').innerText = st.ben2.desc;
-                    document.getElementById('baganBen2AvatarBox').innerHTML = renderAvatarBox(st.ben2.foto, st.ben2.nama, "w-16 h-16", "text-lg");
-                }
-            }
+                renderAll();
+            }, (error) => console.error("Teacher listener error:", error));
 
-            renderSiswa(appData.siswa);
-            renderPiketTabs();
-            selectPiketDay(currentDay);
-            renderMemories();
-            renderVideos();
-        }
+            // 3. Students Collection
+            const studentsCol = collection(db, 'artifacts', appId, 'public', 'data', 'students');
+            onSnapshot(studentsCol, (snapshot) => {
+                appData.students = [];
+                snapshot.forEach(d => {
+                    appData.students.push({ id: d.id, ...d.data() });
+                });
+                renderAll();
+            }, (error) => console.error("Students listener error:", error));
 
-        function renderSiswa(list) {
-            const container = document.getElementById('siswaContainer');
-            if (!list || list.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400 font-medium">Siswa tidak ditemukan.</div>`;
-                return;
-            }
-            container.innerHTML = list.map(s => {
-                let avatarHtml = renderAvatarBox(s.foto, s.nama, "w-20 h-20", "text-lg");
-                return `
-                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col items-center text-center gap-2.5 hover:shadow-md transition">
-                        ${avatarHtml}
-                        <div class="w-full overflow-hidden">
-                            <div class="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-600 text-[10px] font-extrabold mb-1">Absen ${s.absen}</div>
-                            <h4 class="font-bold text-slate-900 truncate text-sm" title="${s.nama}">${s.nama}</h4>
-                            <div class="flex items-center justify-center gap-1 mt-1">
-                                <span class="text-[10px] px-2 py-0.5 rounded font-semibold ${s.gender === 'L' ? 'bg-blue-50 text-blue-600' : 'bg-pink-50 text-pink-600'}">${s.gender === 'L' ? 'L' : 'P'}</span>
-                            </div>
-                            <p class="text-[11px] text-slate-400 truncate mt-1">Hobi: ${s.hobi || '-'}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
+            // 4. Schedule Collection
+            const scheduleCol = collection(db, 'artifacts', appId, 'public', 'data', 'schedule');
+            onSnapshot(scheduleCol, (snapshot) => {
+                appData.schedule = [];
+                snapshot.forEach(d => {
+                    appData.schedule.push({ id: d.id, ...d.data() });
+                });
+                renderAll();
+            }, (error) => console.error("Schedule listener error:", error));
 
-        function filterSiswa() {
-            const query = document.getElementById('searchSiswa').value.toLowerCase();
-            const filtered = (appData.siswa || []).filter(s => 
-                s.nama.toLowerCase().includes(query) || s.absen.toString().includes(query) || (s.hobi && s.hobi.toLowerCase().includes(query))
-            );
-            renderSiswa(filtered);
-        }
+            // 5. Documents Collection
+            const docsCol = collection(db, 'artifacts', appId, 'public', 'data', 'documents');
+            onSnapshot(docsCol, (snapshot) => {
+                appData.documents = [];
+                snapshot.forEach(d => {
+                    appData.documents.push({ id: d.id, ...d.data() });
+                });
+                renderAll();
+            }, (error) => console.error("Documents listener error:", error));
 
-        function renderPiketTabs() {
-            const days = Object.keys(appData.piket || {});
-            const container = document.getElementById('dayTabs');
-            container.innerHTML = days.map(day => `
-                <button onclick="selectPiketDay('${day}')" class="px-5 py-2.5 rounded-xl font-bold text-sm transition ${currentDay === day ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
-                    ${day}
-                </button>
-            `).join('');
-        }
-
-        function selectPiketDay(day) {
-            currentDay = day;
-            renderPiketTabs();
-            document.getElementById('selectedDayTitle').innerText = `Petugas Hari ${day}`;
-            const members = appData.piket[day] || [];
-            const listContainer = document.getElementById('piketMemberList');
-            listContainer.innerHTML = members.map((m, idx) => `
-                <li class="flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl text-sm font-medium">
-                    <span class="w-6 h-6 rounded-full bg-blue-500/30 flex items-center justify-center text-xs font-bold">${idx + 1}</span>
-                    <span>${m}</span>
-                </li>
-            `).join('');
-        }
-
-        function renderMemories() {
-            const container = document.getElementById('memoriesContainer');
-            const memories = appData.memories || [];
-            if (memories.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">Belum ada galeri foto yang diunggah.</div>`;
-                return;
-            }
-            container.innerHTML = memories.map(m => `
-                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col group hover:shadow-xl transition">
-                    <div class="h-48 overflow-hidden relative bg-slate-100">
-                        <img src="${m.foto}" alt="${m.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/2563eb/ffffff?text=Kenangan'">
-                        <span class="absolute top-3 right-3 px-3 py-1 bg-slate-900/70 backdrop-blur-md text-white text-xs font-bold rounded-full">${m.date}</span>
-                    </div>
-                    <div class="p-5 flex flex-col justify-between flex-grow">
-                        <h4 class="font-bold text-slate-900 text-base mb-2">${m.title}</h4>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderVideos() {
-            const container = document.getElementById('videosContainer');
-            const videos = appData.videos || [];
-            if (videos.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400 font-medium">Belum ada video dokumentasi yang ditambahkan.</div>`;
-                return;
-            }
-            container.innerHTML = videos.map(v => {
-                let embedUrl = v.url;
-                if (embedUrl.includes('watch?v=')) {
-                    embedUrl = embedUrl.replace('watch?v=', 'embed/');
-                } else if (embedUrl.includes('youtu.be/')) {
-                    embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
-                }
-                return `
-                    <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 flex flex-col">
-                        <div class="relative w-full aspect-video bg-slate-900">
-                            <iframe src="${embedUrl}" title="${v.title}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="p-5">
-                            <h4 class="font-bold text-slate-900 text-base">${v.title}</h4>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function handlePostMessage(event) {
-            event.preventDefault();
-            const name = document.getElementById('msgName').value.trim();
-            const target = document.getElementById('msgTarget').value.trim();
-            const content = document.getElementById('msgContent').value.trim();
-
-            if (!name || !target || !content) return;
-
-            const newMsg = {
-                id: Date.now(),
-                name,
-                target,
-                content,
-                time: "Baru saja"
-            };
-
-            const currentRaw = localStorage.getItem('classPortalData');
-            if (currentRaw) {
-                appData = JSON.parse(currentRaw);
-            }
-            if (!appData.messages) {
+            // 6. Messages Collection
+            const messagesCol = collection(db, 'artifacts', appId, 'public', 'data', 'messages');
+            onSnapshot(messagesCol, (snapshot) => {
                 appData.messages = [];
-            }
-            appData.messages.unshift(newMsg);
-            localStorage.setItem('classPortalData', JSON.stringify(appData));
-            
-            document.getElementById('msgTarget').value = "";
-            document.getElementById('msgContent').value = "";
-            showToast("Pesan berhasil dikirim!");
+                snapshot.forEach(d => {
+                    appData.messages.push({ id: d.id, ...d.data() });
+                });
+                renderAll();
+            }, (error) => console.error("Messages listener error:", error));
         }
 
-        function toggleMobileMenu() {
+        // Global Render dispatcher
+        window.renderAll = function() {
+            renderPublicWebsite();
+            renderAdminDashboard();
+        }
+
+        // -------------------------------------------------------------
+        // PUBLIC WEBSITE RENDERING
+        // -------------------------------------------------------------
+        function renderPublicWebsite() {
+            const s = appData.settings;
+            // Header & Hero
+            document.getElementById('navSchoolNameHeader').innerText = s.schoolName;
+            document.getElementById('heroSchoolName').innerText = s.schoolName;
+            document.getElementById('heroDescription').innerText = s.classDesc;
+            document.getElementById('heroBannerImg').src = s.bannerImg || 'https://placehold.co/600x450/1d4ed8/ffffff?text=XII+MERDEKA+7';
+
+            // About Section
+            document.getElementById('aboutSchoolName').innerText = s.schoolName;
+            document.getElementById('aboutAcademicYear').innerText = s.academicYear;
+            document.getElementById('aboutTotalStudents').innerText = `${appData.students.length} Siswa Terdaftar`;
+            document.getElementById('aboutClassDescription').innerText = s.classDesc;
+
+            // Homeroom Teacher Section
+            const teacherContainer = document.getElementById('homeroomTeacherContainer');
+            if (appData.teacher) {
+                const t = appData.teacher;
+                teacherContainer.innerHTML = `
+                    <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl text-center">
+                        <div class="w-36 h-36 rounded-full overflow-hidden mx-auto mb-6 border-4 border-primary/20 shadow-lg">
+                            <img src="${t.photo || 'https://placehold.co/300x300/1d4ed8/ffffff?text=Wali+Kelas'}" alt="${t.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x300/1d4ed8/ffffff?text=Wali+Kelas'">
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-1">${t.name}</h3>
+                        <p class="text-primary font-semibold text-sm mb-4">Wali Kelas XII Merdeka 7</p>
+                        <p class="text-slate-600 text-base leading-relaxed">${t.desc}</p>
+                    </div>
+                `;
+            } else {
+                teacherContainer.innerHTML = `
+                    <div class="bg-white rounded-3xl p-10 border border-slate-100 shadow-sm text-center">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-user-slash"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium">Data wali kelas belum tersedia.</p>
+                    </div>
+                `;
+            }
+
+            // Students Section
+            renderPublicStudents(appData.students);
+
+            // Schedule Section
+            const scheduleContainer = document.getElementById('scheduleContainer');
+            if (appData.schedule.length > 0) {
+                scheduleContainer.innerHTML = appData.schedule.map(sch => `
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-primary text-white font-bold flex items-center justify-center text-sm shadow-md">
+                                <i class="fa-solid fa-calendar-day"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900">${sch.day}</h3>
+                        </div>
+                        <div class="text-slate-700 font-medium bg-surface p-4 rounded-2xl border border-slate-100">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider mb-1 font-semibold">Petugas Piket:</p>
+                            <p class="text-sm sm:text-base">${sch.members}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                scheduleContainer.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 border border-slate-100 shadow-sm text-center">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-calendar-xmark"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium">Jadwal piket belum tersedia.</p>
+                    </div>
+                `;
+            }
+
+            // Documentation Section
+            const docContainer = document.getElementById('documentationGrid');
+            if (appData.documents.length > 0) {
+                docContainer.innerHTML = appData.documents.map(doc => `
+                    <div onclick="openLightbox('${doc.photo}', '${doc.title}', '${doc.desc}', '${doc.date}')" class="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition cursor-pointer flex flex-col">
+                        <div class="aspect-[16/10] overflow-hidden bg-slate-100 relative">
+                            <img src="${doc.photo}" alt="${doc.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/1d4ed8/ffffff?text=Dokumentasi'">
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 bg-white/90 text-slate-900 font-bold text-xs rounded-full shadow-lg">Perbesar</span>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-xs font-semibold text-primary mb-2 flex items-center gap-1.5"><i class="fa-regular fa-calendar"></i> ${doc.date}</span>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-primary transition">${doc.title}</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed">${doc.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                docContainer.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 border border-slate-100 shadow-sm text-center">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-images"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium">Belum ada dokumentasi yang ditambahkan.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderPublicStudents(students) {
+            const grid = document.getElementById('studentsGrid');
+            if (students.length > 0) {
+                grid.innerHTML = students.map((s, idx) => `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-center flex flex-col items-center hover:shadow-md transition">
+                        <div class="w-24 h-24 rounded-full overflow-hidden mb-3 bg-slate-100 border-2 border-primary/20 shadow-inner">
+                            <img src="${s.photo || 'https://placehold.co/200x200/1d4ed8/ffffff?text=Siswa'}" alt="${s.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/200x200/1d4ed8/ffffff?text=Siswa'">
+                        </div>
+                        <span class="text-xs font-bold text-primary mb-1">#${idx + 1}</span>
+                        <h4 class="text-sm font-bold text-slate-900 line-clamp-2">${s.name}</h4>
+                    </div>
+                `).join('');
+            } else {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl p-12 border border-slate-100 shadow-sm text-center">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
+                            <i class="fa-solid fa-users-slash"></i>
+                        </div>
+                        <p class="text-slate-500 font-medium">Data siswa belum tersedia.</p>
+                    </div>
+                `;
+            }
+        }
+
+        window.filterStudents = function() {
+            const query = document.getElementById('studentSearchInput').value.toLowerCase();
+            const filtered = appData.students.filter(s => s.name.toLowerCase().includes(query));
+            renderPublicStudents(filtered);
+        }
+
+        // -------------------------------------------------------------
+        // ADMIN DASHBOARD RENDERING
+        // -------------------------------------------------------------
+        function renderAdminDashboard() {
+            // Stats
+            document.getElementById('statTotalStudents').innerText = appData.students.length;
+            document.getElementById('statTotalDocs').innerText = appData.documents.length;
+            document.getElementById('statTotalSchedule').innerText = appData.schedule.length;
+            document.getElementById('statTotalMessages').innerText = appData.messages.length;
+
+            const unreadCount = appData.messages.filter(m => !m.read).length;
+            const badge = document.getElementById('unreadBadge');
+            if (unreadCount > 0) {
+                badge.innerText = unreadCount;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            // Settings Form populate
+            const s = appData.settings;
+            document.getElementById('settingSchoolName').value = s.schoolName || '';
+            document.getElementById('settingAcademicYear').value = s.academicYear || '';
+            document.getElementById('settingBannerImg').value = s.bannerImg || '';
+            document.getElementById('settingClassDesc').value = s.classDesc || '';
+
+            // Teacher Form populate
+            if (appData.teacher) {
+                document.getElementById('teacherName').value = appData.teacher.name || '';
+                document.getElementById('teacherPhoto').value = appData.teacher.photo || '';
+                document.getElementById('teacherDesc').value = appData.teacher.desc || '';
+            } else {
+                document.getElementById('teacherName').value = '';
+                document.getElementById('teacherPhoto').value = '';
+                document.getElementById('teacherDesc').value = '';
+            }
+
+            // Students Admin Table
+            const studentsTable = document.getElementById('adminStudentsTable');
+            if (appData.students.length > 0) {
+                studentsTable.innerHTML = `
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-500 uppercase">
+                                <th class="pb-3 px-4">No</th>
+                                <th class="pb-3 px-4">Foto</th>
+                                <th class="pb-3 px-4">Nama Lengkap</th>
+                                <th class="pb-3 px-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            ${appData.students.map((st, i) => `
+                                <tr class="hover:bg-surface">
+                                    <td class="py-3 px-4 font-semibold text-slate-500">${i + 1}</td>
+                                    <td class="py-3 px-4">
+                                        <img src="${st.photo || 'https://placehold.co/100x100/1d4ed8/ffffff?text=Siswa'}" class="w-10 h-10 rounded-full object-cover border border-slate-200" onerror="this.src='https://placehold.co/100x100/1d4ed8/ffffff?text=Siswa'">
+                                    </td>
+                                    <td class="py-3 px-4 font-bold text-slate-900">${st.name}</td>
+                                    <td class="py-3 px-4 text-right space-x-2">
+                                        <button onclick="editStudent('${st.id}')" class="px-3 py-1.5 bg-blue-50 text-primary hover:bg-blue-100 font-semibold rounded-lg text-xs transition">Edit</button>
+                                        <button onclick="deleteStudent('${st.id}')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 font-semibold rounded-lg text-xs transition">Hapus</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                studentsTable.innerHTML = `<p class="text-slate-500 text-center py-6">Belum ada data siswa.</p>`;
+            }
+
+            // Schedule Admin Table
+            const scheduleTable = document.getElementById('adminScheduleTable');
+            if (appData.schedule.length > 0) {
+                scheduleTable.innerHTML = `
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-500 uppercase">
+                                <th class="pb-3 px-4">Hari</th>
+                                <th class="pb-3 px-4">Petugas Piket</th>
+                                <th class="pb-3 px-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            ${appData.schedule.map(sc => `
+                                <tr class="hover:bg-surface">
+                                    <td class="py-3 px-4 font-bold text-slate-900">${sc.day}</td>
+                                    <td class="py-3 px-4 text-slate-700">${sc.members}</td>
+                                    <td class="py-3 px-4 text-right space-x-2">
+                                        <button onclick="editSchedule('${sc.id}')" class="px-3 py-1.5 bg-blue-50 text-primary hover:bg-blue-100 font-semibold rounded-lg text-xs transition">Edit</button>
+                                        <button onclick="deleteSchedule('${sc.id}')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 font-semibold rounded-lg text-xs transition">Hapus</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                scheduleTable.innerHTML = `<p class="text-slate-500 text-center py-6">Belum ada jadwal piket.</p>`;
+            }
+
+            // Documentation Admin Table
+            const docTable = document.getElementById('adminDocTable');
+            if (appData.documents.length > 0) {
+                docTable.innerHTML = `
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-200 text-xs font-bold text-slate-500 uppercase">
+                                <th class="pb-3 px-4">Foto</th>
+                                <th class="pb-3 px-4">Judul</th>
+                                <th class="pb-3 px-4">Tanggal</th>
+                                <th class="pb-3 px-4 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            ${appData.documents.map(d => `
+                                <tr class="hover:bg-surface">
+                                    <td class="py-3 px-4">
+                                        <img src="${d.photo}" class="w-12 h-9 rounded-lg object-cover border border-slate-200" onerror="this.src='https://placehold.co/100x100/1d4ed8/ffffff?text=Doc'">
+                                    </td>
+                                    <td class="py-3 px-4 font-bold text-slate-900">${d.title}</td>
+                                    <td class="py-3 px-4 text-slate-600 text-xs">${d.date}</td>
+                                    <td class="py-3 px-4 text-right space-x-2">
+                                        <button onclick="editDoc('${d.id}')" class="px-3 py-1.5 bg-blue-50 text-primary hover:bg-blue-100 font-semibold rounded-lg text-xs transition">Edit</button>
+                                        <button onclick="deleteDoc('${d.id}')" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 font-semibold rounded-lg text-xs transition">Hapus</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else {
+                docTable.innerHTML = `<p class="text-slate-500 text-center py-6">Belum ada dokumentasi.</p>`;
+            }
+
+            // Messages Admin List
+            const msgList = document.getElementById('adminMessagesList');
+            if (appData.messages.length > 0) {
+                msgList.innerHTML = appData.messages.map(m => `
+                    <div class="p-6 rounded-2xl border ${m.read ? 'bg-white border-slate-200' : 'bg-blue-50/50 border-blue-200'} shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-3">
+                                <h4 class="font-bold text-slate-900 text-base">${m.name}</h4>
+                                ${!m.read ? '<span class="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">Baru</span>' : ''}
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed">${m.message}</p>
+                            <p class="text-xs text-slate-400 font-medium">${m.timestamp || 'Baru saja'}</p>
+                        </div>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            ${!m.read ? `<button onclick="markMessageRead('${m.id}')" class="px-3 py-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 font-semibold rounded-xl text-xs transition">Tandai Dibaca</button>` : ''}
+                            <button onclick="deleteMessage('${m.id}')" class="px-3 py-2 bg-rose-50 text-rose-600 hover:bg-rose-100 font-semibold rounded-xl text-xs transition">Hapus</button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                msgList.innerHTML = `<p class="text-slate-500 text-center py-6">Belum ada pesan masuk.</p>`;
+            }
+        }
+
+        // -------------------------------------------------------------
+        // ADMIN ACTIONS & FIRESTORE MUTATIONS
+        // -------------------------------------------------------------
+        window.saveWebsiteSettings = async function(e) {
+            e.preventDefault();
+            const newSettings = {
+                schoolName: document.getElementById('settingSchoolName').value,
+                academicYear: document.getElementById('settingAcademicYear').value,
+                bannerImg: document.getElementById('settingBannerImg').value,
+                classDesc: document.getElementById('settingClassDesc').value
+            };
+            if (db && currentUser) {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'settings'), newSettings);
+            } else {
+                appData.settings = newSettings;
+                renderAll();
+            }
+            showModal("Berhasil", "Pengaturan website berhasil diperbarui.", "success");
+        }
+
+        window.saveHomeroomTeacher = async function(e) {
+            e.preventDefault();
+            const teacherData = {
+                name: document.getElementById('teacherName').value,
+                photo: document.getElementById('teacherPhoto').value,
+                desc: document.getElementById('teacherDesc').value
+            };
+            if (db && currentUser) {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'teacher'), teacherData);
+            } else {
+                appData.teacher = teacherData;
+                renderAll();
+            }
+            showModal("Berhasil", "Data wali kelas berhasil disimpan.", "success");
+        }
+
+        window.deleteHomeroomTeacher = async function() {
+            if (!confirm("Hapus data wali kelas?")) return;
+            if (db && currentUser) {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'teacher'), {});
+            } else {
+                appData.teacher = null;
+                renderAll();
+            }
+            showModal("Berhasil", "Data wali kelas berhasil dihapus.", "success");
+        }
+
+        // Student actions
+        window.openStudentModal = function(id = '', name = '', photo = '') {
+            document.getElementById('studentId').value = id;
+            document.getElementById('studentNameInput').value = name;
+            document.getElementById('studentPhotoInput').value = photo;
+            document.getElementById('studentModalTitle').innerText = id ? 'Edit Data Siswa' : 'Tambah Siswa Baru';
+            document.getElementById('studentModal').classList.remove('hidden');
+        }
+
+        window.closeStudentModal = function() {
+            document.getElementById('studentModal').classList.add('hidden');
+        }
+
+        window.editStudent = function(id) {
+            const st = appData.students.find(s => s.id === id);
+            if (st) openStudentModal(st.id, st.name, st.photo);
+        }
+
+        window.saveStudent = async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('studentId').value;
+            const studentData = {
+                name: document.getElementById('studentNameInput').value,
+                photo: document.getElementById('studentPhotoInput').value
+            };
+            if (db && currentUser) {
+                if (id) {
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'students', id), studentData);
+                } else {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'students'), studentData);
+                }
+            } else {
+                if (id) {
+                    const idx = appData.students.findIndex(s => s.id === id);
+                    if (idx !== -1) appData.students[idx] = { id, ...studentData };
+                } else {
+                    appData.students.push({ id: 'local-' + Date.now(), ...studentData });
+                }
+                renderAll();
+            }
+            closeStudentModal();
+            showModal("Berhasil", "Data siswa berhasil disimpan.", "success");
+        }
+
+        window.deleteStudent = async function(id) {
+            if (!confirm("Hapus siswa ini?")) return;
+            if (db && currentUser) {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'students', id));
+            } else {
+                appData.students = appData.students.filter(s => s.id !== id);
+                renderAll();
+            }
+            showModal("Berhasil", "Data siswa berhasil dihapus.", "success");
+        }
+
+        // Schedule actions
+        window.openScheduleModal = function(id = '', day = 'Senin', members = '') {
+            document.getElementById('scheduleId').value = id;
+            document.getElementById('scheduleDayInput').value = day;
+            document.getElementById('scheduleMembersInput').value = members;
+            document.getElementById('scheduleModalTitle').innerText = id ? 'Edit Jadwal Piket' : 'Tambah Jadwal Piket';
+            document.getElementById('scheduleModal').classList.remove('hidden');
+        }
+
+        window.closeScheduleModal = function() {
+            document.getElementById('scheduleModal').classList.add('hidden');
+        }
+
+        window.editSchedule = function(id) {
+            const sc = appData.schedule.find(s => s.id === id);
+            if (sc) openScheduleModal(sc.id, sc.day, sc.members);
+        }
+
+        window.saveSchedule = async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('scheduleId').value;
+            const schedData = {
+                day: document.getElementById('scheduleDayInput').value,
+                members: document.getElementById('scheduleMembersInput').value
+            };
+            if (db && currentUser) {
+                if (id) {
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'schedule', id), schedData);
+                } else {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'schedule'), schedData);
+                }
+            } else {
+                if (id) {
+                    const idx = appData.schedule.findIndex(s => s.id === id);
+                    if (idx !== -1) appData.schedule[idx] = { id, ...schedData };
+                } else {
+                    appData.schedule.push({ id: 'local-' + Date.now(), ...schedData });
+                }
+                renderAll();
+            }
+            closeScheduleModal();
+            showModal("Berhasil", "Jadwal piket berhasil disimpan.", "success");
+        }
+
+        window.deleteSchedule = async function(id) {
+            if (!confirm("Hapus jadwal ini?")) return;
+            if (db && currentUser) {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'schedule', id));
+            } else {
+                appData.schedule = appData.schedule.filter(s => s.id !== id);
+                renderAll();
+            }
+            showModal("Berhasil", "Jadwal piket berhasil dihapus.", "success");
+        }
+
+        // Documentation actions
+        window.openDocModal = function(id = '', title = '', photo = '', date = '', desc = '') {
+            document.getElementById('docId').value = id;
+            document.getElementById('docTitleInput').value = title;
+            document.getElementById('docPhotoInput').value = photo;
+            document.getElementById('docDateInput').value = date;
+            document.getElementById('docDescInput').value = desc;
+            document.getElementById('docModalTitle').innerText = id ? 'Edit Dokumentasi' : 'Tambah Dokumentasi';
+            document.getElementById('docModal').classList.remove('hidden');
+        }
+
+        window.closeDocModal = function() {
+            document.getElementById('docModal').classList.add('hidden');
+        }
+
+        window.editDoc = function(id) {
+            const d = appData.documents.find(item => item.id === id);
+            if (d) openDocModal(d.id, d.title, d.photo, d.date, d.desc);
+        }
+
+        window.saveDoc = async function(e) {
+            e.preventDefault();
+            const id = document.getElementById('docId').value;
+            const docData = {
+                title: document.getElementById('docTitleInput').value,
+                photo: document.getElementById('docPhotoInput').value,
+                date: document.getElementById('docDateInput').value,
+                desc: document.getElementById('docDescInput').value
+            };
+            if (db && currentUser) {
+                if (id) {
+                    await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'documents', id), docData);
+                } else {
+                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'documents'), docData);
+                }
+            } else {
+                if (id) {
+                    const idx = appData.documents.findIndex(i => i.id === id);
+                    if (idx !== -1) appData.documents[idx] = { id, ...docData };
+                } else {
+                    appData.documents.push({ id: 'local-' + Date.now(), ...docData });
+                }
+                renderAll();
+            }
+            closeDocModal();
+            showModal("Berhasil", "Dokumentasi berhasil disimpan.", "success");
+        }
+
+        window.deleteDoc = async function(id) {
+            if (!confirm("Hapus dokumentasi ini?")) return;
+            if (db && currentUser) {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'documents', id));
+            } else {
+                appData.documents = appData.documents.filter(i => i.id !== id);
+                renderAll();
+            }
+            showModal("Berhasil", "Dokumentasi berhasil dihapus.", "success");
+        }
+
+        // Public Message submission
+        window.submitPublicMessage = async function(e) {
+            e.preventDefault();
+            const msgData = {
+                name: document.getElementById('visitorName').value,
+                message: document.getElementById('visitorMessage').value,
+                timestamp: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                read: false
+            };
+            if (db && currentUser) {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'messages'), msgData);
+            } else {
+                appData.messages.push({ id: 'local-' + Date.now(), ...msgData });
+                renderAll();
+            }
+            document.getElementById('publicMessageForm').reset();
+            showModal("Pesan Terkirim", "Pesan berhasil dikirim kepada kelas XII Merdeka 7.", "success");
+        }
+
+        window.markMessageRead = async function(id) {
+            if (db && currentUser) {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id), { read: true }, { merge: true });
+            } else {
+                const m = appData.messages.find(item => item.id === id);
+                if (m) m.read = true;
+                renderAll();
+            }
+        }
+
+        window.deleteMessage = async function(id) {
+            if (!confirm("Hapus pesan ini?")) return;
+            if (db && currentUser) {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id));
+            } else {
+                appData.messages = appData.messages.filter(m => m.id !== id);
+                renderAll();
+            }
+            showModal("Berhasil", "Pesan berhasil dihapus.", "success");
+        }
+
+        // -------------------------------------------------------------
+        // NAVIGATION & UI CONTROLLERS
+        // -------------------------------------------------------------
+        window.switchToAdmin = function() {
+            document.getElementById('publicView').classList.add('hidden');
+            document.getElementById('adminLoginView').classList.remove('hidden');
+        }
+
+        window.switchToPublic = function() {
+            document.getElementById('adminLoginView').classList.add('hidden');
+            document.getElementById('adminDashboardView').classList.add('hidden');
+            document.getElementById('publicView').classList.remove('hidden');
+        }
+
+        window.handleAdminLogin = function(e) {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+            // Secure default admin credentials for class management
+            if (u === 'admin7' && p === 'merdeka7') {
+                document.getElementById('adminLoginView').classList.add('hidden');
+                document.getElementById('adminDashboardView').classList.remove('hidden');
+                switchAdminTab('overview');
+                showModal("Login Berhasil", "Selamat datang di Panel Admin XII Merdeka 7.", "success");
+            } else {
+                showModal("Login Gagal", "Username atau password admin salah.", "error");
+            }
+        }
+
+        window.handleAdminLogout = function() {
+            switchToPublic();
+            showModal("Keluar", "Anda telah keluar dari panel admin.", "success");
+        }
+
+        window.switchAdminTab = function(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`adminTab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('[id^="tabBtn-"]').forEach(btn => {
+                btn.className = "w-full text-left px-4 py-3 rounded-xl font-medium text-sm flex items-center gap-3 text-slate-600 hover:bg-slate-50 transition";
+            });
+            const activeBtn = document.getElementById(`tabBtn-${tabName}`);
+            if (activeBtn) {
+                activeBtn.className = "w-full text-left px-4 py-3 rounded-xl font-semibold text-sm flex items-center gap-3 transition bg-primary text-white shadow-md shadow-primary/20";
+            }
+        }
+
+        window.toggleMobileMenu = function() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
         }
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+        window.openLightbox = function(photo, title, desc, date) {
+            document.getElementById('lightboxImg').src = photo;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxDate').innerText = date;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        window.closeLightbox = function() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        window.showModal = function(title, message, type = 'success') {
+            const modal = document.getElementById('notificationModal');
+            const icon = document.getElementById('modalIcon');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = message;
+            
+            if (type === 'success') {
+                icon.className = "w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4 text-2xl";
+                icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+            } else {
+                icon.className = "w-16 h-16 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-4 text-2xl";
+                icon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            }
+            modal.classList.remove('hidden');
+        }
+
+        window.closeModal = function() {
+            document.getElementById('notificationModal').classList.add('hidden');
         }
     </script>
 </body>
